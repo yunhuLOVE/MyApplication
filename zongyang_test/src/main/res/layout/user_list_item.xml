@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:background="@color/agmobile_white"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_height">
+        <TextView
+            android:id="@+id/tv_name_key"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/list_spacing_horizontal"
+            android:textSize="@dimen/text_size_second"
+            android:textColor="@color/agmobile_black"
+            tools:text="姓名："/>
+
+        <TextView
+            android:id="@+id/tv_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/list_spacing_horizontal"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/text_size_second"
+            android:textColor="@color/agmobile_black"
+            tools:text="张三"/>
+
+        <ImageView
+            android:id="@+id/iv_enter"
+            android:layout_width="@dimen/list_enter_width"
+            android:layout_height="@dimen/list_enter_height"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/list_spacing_horizontal"
+            android:src="@mipmap/common_ic_enter"
+            android:visibility="gone"/>
+        <View  android:layout_width="match_parent"
+               android:layout_height="1dp"
+            android:background="@color/agmobile_grey_0"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>

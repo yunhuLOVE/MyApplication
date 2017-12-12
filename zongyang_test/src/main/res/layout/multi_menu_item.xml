@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingBottom="@dimen/bottom_bar_padding_vertical"
+    android:paddingTop="@dimen/bottom_bar_padding_vertical">
+<LinearLayout
+    style="@style/MultiMenuButton">
+
+    <ImageView
+        android:id="@+id/iv_menu_btn"
+        style="@style/PhoneMenuButtonIcon"/>
+    <TextView
+        android:id="@+id/tv_menu_title"
+        style="@style/PhoneMenuButtonText"/>
+</LinearLayout>
+    </LinearLayout>

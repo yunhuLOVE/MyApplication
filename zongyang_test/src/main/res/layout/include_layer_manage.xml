@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/btn_5"
+        style="@style/PhoneMapButton"
+        android:scaleType="fitCenter">
+
+        <ImageView
+            style="@style/PhoneMapButtonIcon"
+            android:src="@drawable/phone_ic_layers_white_24dp"/>
+
+        <TextView
+            style="@style/PhoneMapButtonText"
+            android:text="图层"
+            />
+    </LinearLayout>
+</LinearLayout>

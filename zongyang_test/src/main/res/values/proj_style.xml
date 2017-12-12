@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--专题列表项前的图标样式-->
+    <style name="AGPlanProjectListSymbol">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_marginLeft">@dimen/list_symbol_margin_left</item>
+        <item name="android:layout_marginRight">@dimen/list_symbol_margin_right</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/project_list_ic_manage</item>
+    </style>
+</resources>

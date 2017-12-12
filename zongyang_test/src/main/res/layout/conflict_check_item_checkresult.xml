@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/tv_land_property_name"
+            style="@style/MultiPlanConflictCheckResultTextStyle"
+            android:text="城规用地性质名称"
+            />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical"/>
+
+        <TextView
+            android:id="@+id/tv_land_property"
+            style="@style/MultiPlanConflictCheckResultTextStyle"
+            android:text="城规用地性质"
+            />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical"/>
+
+        <TextView
+            android:id="@+id/tv_land_use_subarea"
+            style="@style/MultiPlanConflictCheckResultTextStyle"
+            android:text="土地用途分区"
+            />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical"/>
+
+        <TextView
+            android:id="@+id/tv_land_use"
+            style="@style/MultiPlanConflictCheckResultTextStyle"
+            android:text="土地用地"
+            />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical"/>
+
+        <TextView
+            android:id="@+id/tv_land_area_size"
+            style="@style/MultiPlanConflictCheckResultTextStyle"
+            android:text="块地面积（平方米）"
+            />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical"/>
+
+        <TextView
+            android:id="@+id/tv_land_difference"
+            style="@style/MultiPlanConflictCheckResultTextStyle"
+            android:text="差异类型"
+            />
+    </LinearLayout>
+    <View style="@style/AGMobile.Widget.View.DividerHorizontal"/>
+</LinearLayout>

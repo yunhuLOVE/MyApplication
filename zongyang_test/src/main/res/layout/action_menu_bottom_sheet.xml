@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:fitsSystemWindows="false">
+
+    <!--
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/bottom_sheet_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/agmobile_white"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
+        app:layout_behavior="@string/bottom_sheet_behavior_not_default"/>
+        -->
+    <LinearLayout
+        android:id="@+id/action_container_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/agmobile_white"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:clickable="true"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="@dimen/multiplan_bottom_sheet_peek_height"
+        app:layout_behavior="com.augurit.am.cmpt.widget.bottomsheet.AnchorSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clickable="true">
+
+            <RelativeLayout
+                android:id="@+id/ll_change_menu"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/multiplan_primary_color"
+                android:clickable="true"
+                >
+
+                <TextView
+                    android:id="@+id/menu_action_title"
+                    style="@style/AGMobile.Widget.TextView.TopBarTitle"
+                    android:text="功能名称"
+                    android:textColor="@android:color/white"/>
+
+                <LinearLayout
+                    android:id="@+id/btn_back"
+                    style="@style/AGMobile.Widget.Button.Container.Dark"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/top_icon_margin_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btn_change_menu"
+                        style="@style/AGMobile.Widget.ImageButton.TopBar"
+                        android:background="@mipmap/left_back_arrow"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:clickable="true"
+                android:id="@+id/action_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></FrameLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

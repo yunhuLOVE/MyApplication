@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/agmobile_blue"
+    android:orientation="horizontal">
+
+    <!--关闭按钮-->
+    <LinearLayout
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/min_touchable_size"
+        android:layout_height="@dimen/min_touchable_size"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/list_symbol_margin_right"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/common_sel_btn_light"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/top_icon_size"
+            android:layout_height="@dimen/top_icon_size"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/common_ic_close_white"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_close">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="我是标题"
+            android:textColor="@color/agmobile_white"/>
+    </RelativeLayout>
+
+</RelativeLayout>

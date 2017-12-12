@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:text="辅助选址"
+            android:visibility="gone"
+            android:textColor="@color/agmobile_white"
+            android:textSize="@dimen/text_size_first" />
+
+        <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- android:background="@drawable/searchview_bg_edittext" -->
+
+                <EditText
+                    android:id="@+id/edt_project_name"
+                    style="@style/PlanEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="请输入项目名称"
+                    android:textSize="@dimen/text_size_third"
+                    android:visibility="gone" />
+
+                <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+
+                <EditText
+                    android:id="@+id/edt_project_code"
+                    style="@style/PlanEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="请输入项目编号"
+                    android:textSize="@dimen/text_size_third"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textSize="16sp"
+                        android:text="项目类别："
+                        />
+
+                    <com.augurit.am.cmpt.widget.spinner.AMSpinner
+                        android:id="@+id/sp_project_nature"
+                        style="@style/PlanSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp">
+
+                    </com.augurit.am.cmpt.widget.spinner.AMSpinner>
+                </LinearLayout>
+                <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textSize="16sp"
+                        android:text="选址方案："
+                        />
+
+                    <com.augurit.am.cmpt.widget.spinner.AMSpinner
+                        android:id="@+id/sp_site_selection"
+                        style="@style/PlanSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp">
+
+                    </com.augurit.am.cmpt.widget.spinner.AMSpinner>
+                </LinearLayout>
+
+                <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+                <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textSize="16sp"
+                        android:text="用地性质："
+                        />
+                    <include
+                        android:id="@+id/sp_land_nature_sp"
+                        layout="@layout/spinner_bg_layout" />
+                </LinearLayout>
+                <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@color/agmobile_red" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="用地性质:"
+                            android:textSize="16sp" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_land_nature_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <RadioButton
+                                android:id="@+id/rb_land_nature_90"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="90版"
+                                android:textColor="@color/agmobile_blue" />
+
+                            <RadioButton
+                                android:id="@+id/rb_land_nature_11"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:text="11版"
+                                android:textColor="@color/agmobile_blue" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+
+                    <Button
+                        android:id="@+id/sp_land_nature"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/spinner_background"
+                        android:visibility="gone">
+
+                    </Button>
+                </LinearLayout>
+                <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="@color/agmobile_red" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="用地面积："
+                            android:textSize="16sp" />
+                        <LinearLayout
+                            android:id="@+id/ll_land_range"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/edt_area_min"
+                                style="@style/PlanEditText"
+                                android:singleLine="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:inputType="numberDecimal"
+                                android:hint="最小值(m²)" />
+
+                            <View
+                                android:layout_width="15dp"
+                                android:layout_height="2dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="10dp"
+                                android:background="@color/list_divider" />
+
+                            <EditText
+                                android:id="@+id/edt_area_max"
+                                style="@style/PlanEditText"
+                                android:singleLine="true"
+                                android:inputType="numberDecimal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:hint="最大值(m²)" />
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rg_land_area_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            android:weightSum="2">
+
+                            <RadioButton
+                                android:id="@+id/rb_land_area_value"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+
+                                android:text="面积值"
+                                android:textColor="@color/agmobile_blue" />
+                            <RadioButton
+                                android:id="@+id/rb_land_area_range"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:text="面积区间"
+                                android:textColor="@color/agmobile_blue" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_land_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edt_area_value"
+                            style="@style/PlanEditText"
+                            android:lines="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="请输入面积值(m²)" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_search"
+                style="@style/AGMobile.Widget.Button.Positive"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="搜索"
+                android:textSize="@dimen/text_size_second"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_height="36dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:text="区域选择："/>
+                <RadioGroup
+                    android:id="@+id/rg_region"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_region"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:textColor="@color/agmobile_blue"
+                        android:text="行政区域" />
+
+                    <RadioButton
+                        android:id="@+id/rb_file_import"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/agmobile_blue"
+                        android:text="文件导入" />
+
+                    <RadioButton
+                        android:id="@+id/rb_draw_import"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/agmobile_blue"
+                        android:text="手绘" />
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <View style="@style/AGMobile.Widget.View.DividerHorizontal" />
+
+            <include
+                android:id="@+id/layout_region"
+                layout="@layout/auxiliary_location_region_item" />
+
+            <include
+                android:id="@+id/layout_file_import"
+                layout="@layout/auxiliary_location_file_item"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/layout_draw"
+                layout="@layout/auxiliary_location_draw_item"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_kg_search"
+            style="@style/PlanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="20dp"
+            android:text="根据控规筛选" />
+    </LinearLayout>
+
+</ScrollView>

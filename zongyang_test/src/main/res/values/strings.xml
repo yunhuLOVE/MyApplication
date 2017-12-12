@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">@string/app_name_sy</string>
+
+    <string name="app_name_dev">MultiPlan</string>
+    <!-- todo 原名：多规(agweb配置版) 为多规演示暂时修改 -->
+    <string name="app_name_sy">惠州市"四规合一"空间信息平台</string>
+
+    <!--bottomsheet滑动设置-->
+    <string name="bottom_sheet_behavior_not_default">com.augurit.am.cmpt.widget.bottomsheet.AnchorSheetBehavior</string>
+
+    <string name="action_voice_rec">action voice rec</string>
+    <string name="action_location">action location</string>
+    <string name="action_taxi">action taxi</string>
+    <string name="action_change_colors">change style</string>
+    <string name="action_draw_geometry">绘图</string>
+    <string name="action_bookmark">书签</string>
+    <string name="action_search">查询</string>
+    <string name="action_mark">标注</string>
+    <string name="action_auxiliary">辅助选址</string>
+    <string name="action_project_statistics">建设项目统计</string>
+    <string name="action_conflict_check">两规冲突检测</string>
+
+
+    <string name="action_example_with_sliding_list">项目</string>
+    <string name="action_example_sliding_search_bar">专题</string>
+    <string name="action_example_scrolling_search_bar">下载</string>
+
+    <string name="login_fingerprint_hint">请验证指纹登录</string>
+
+    <string name="alpha">0.8</string>
+
+    <!--手机版搜索功能-->
+    <string name="transition_search_back" translatable="false">transition_search_back</string>
+    <string name="multiplan_search_hint">请输入许可证编号/重点项目</string>
+</resources>

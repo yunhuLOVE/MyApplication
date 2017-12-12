@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--附件上传-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:clickable="true"
+              android:background="@color/agmobile_white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/multiplan_primary_color">
+
+        <LinearLayout
+            android:id="@+id/btn_back"
+            style="@style/AGMobile.Widget.Button.Container.Light"
+            android:layout_width="@dimen/top_bar_height"
+            android:layout_height="@dimen/top_bar_height"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/AGMobile.Widget.ImageButton.TopBar"
+                android:src="@mipmap/common_ic_back"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加附件"
+            android:textColor="@color/white_light"
+            android:textSize="@dimen/text_size_second"/>
+
+        <View
+            style="@style/AGMobile.Widget.View.DividerVertical"
+            android:background="@color/white_deep"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toLeftOf="@+id/btn_upload"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/btn_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="@style/AGMobile.Widget.Button.Container.Dark">
+
+            <TextView
+                style="@style/WorkButton"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:text="上传"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_margin="8dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_photos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</LinearLayout>

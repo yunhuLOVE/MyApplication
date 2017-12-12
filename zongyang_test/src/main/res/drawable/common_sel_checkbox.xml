@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--通用的黑色CheckBox-->
+<!--作为Background使用-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="@android:integer/config_shortAnimTime"
+    android:exitFadeDuration="@android:integer/config_shortAnimTime">
+
+    <item android:state_checked="true"
+          android:drawable="@drawable/ic_checked_blue">
+    </item>
+
+    <item android:state_checked="false"
+        android:drawable="@drawable/ic_uncheck_grey">
+    </item>
+</selector>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/btn_mark"
+        style="@style/MultiMoreMenuItem"
+        android:background="@color/white_deep">
+
+        <ImageView
+            android:id="@+id/iv_menu_btn"
+            style="@style/MoreMenuItemIcon" />
+
+        <TextView
+            android:id="@+id/tv_menu_title"
+            style="@style/MoreMenuItemText"
+            android:layout_toRightOf="@id/iv_menu_btn"/>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_menu_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:id="@+id/view_menu_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--<RelativeLayout
+                android:id="@+id/btn_search"
+                style="@style/MoreMenuItem">
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    style="@style/MoreMenuItemIcon"
+                    android:src="@drawable/menu_ic_search_blue"/>
+
+                <TextView
+                    android:id="@+id/tv_search"
+                    style="@style/MoreMenuItemText"
+                    android:text="@string/action_search"
+                    android:layout_toRightOf="@id/iv_search"/>
+            </RelativeLayout>-->
+
+            <RelativeLayout
+                android:id="@+id/btn_mark"
+                style="@style/MoreMenuItem"
+                android:background="@color/white_deep">
+
+                <ImageView
+                    android:id="@+id/iv_mark"
+                    style="@style/MoreMenuItemIcon"
+                    android:src="@drawable/phone_menu_ic_mark_blue"/>
+
+                <TextView
+                    android:id="@+id/tv_mark"
+                    style="@style/MoreMenuItemText"
+                    android:layout_toRightOf="@id/iv_mark"
+                    android:text="@string/action_mark"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_project_statistics"
+                style="@style/MoreMenuItem">
+
+                <ImageView
+                    android:id="@+id/iv_stat"
+                    style="@style/MoreMenuItemIcon"
+                    android:src="@drawable/phone_menu_ic_project_statistics_blue"/>
+
+                <TextView
+                    android:id="@+id/tv_stat"
+                    style="@style/MoreMenuItemText"
+                    android:layout_toRightOf="@id/iv_stat"
+                    android:text="@string/action_project_statistics"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_auxiliary"
+                style="@style/MoreMenuItem"
+                android:background="@color/white_deep">
+
+                <ImageView
+                    android:id="@+id/iv_auxiliary"
+                    style="@style/MoreMenuItemIcon"
+                    android:src="@drawable/menu_ic_auxiliary_blue"/>
+
+                <TextView
+                    android:id="@+id/tv_auxiliary"
+                    style="@style/MoreMenuItemText"
+                    android:layout_toRightOf="@id/iv_auxiliary"
+                    android:text="@string/action_auxiliary"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_bookmark"
+                style="@style/MoreMenuItem">
+
+                <ImageView
+                    android:id="@+id/iv_bookmark"
+                    style="@style/MoreMenuItemIcon"
+                    android:src="@drawable/phone_menu_ic_bookmark_blue"/>
+
+                <TextView
+                    android:id="@+id/tv_bookmark"
+                    style="@style/MoreMenuItemText"
+                    android:layout_toRightOf="@id/iv_bookmark"
+                    android:text="@string/action_bookmark"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_conflictcheck"
+                style="@style/MoreMenuItem"
+                android:background="@color/white_deep"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_conflictcheck"
+                    style="@style/MoreMenuItemIcon"
+                    android:src="@drawable/phone_menu_ic_conflict_check_blue"/>
+
+                <TextView
+                    android:id="@+id/tv_conflictcheck"
+                    style="@style/MoreMenuItemText"
+                    android:layout_toRightOf="@id/iv_conflictcheck"
+                    android:text="@string/action_conflict_check"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

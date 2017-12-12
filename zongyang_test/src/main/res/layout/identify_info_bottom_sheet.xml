@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorlayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:visibility="visible">
+    <!-- 手机用于摆放点查候选列表和更多属性-->
+    <LinearLayout
+        android:id="@+id/identify_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/agmobile_white_dark"
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+        android:visibility="gone"
+        app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
+        app:layout_behavior="@string/bottom_sheet_behavior_not_default"
+        >
+       <!-- app:layout_behavior="@string/bottom_sheet_behavior_not_default"-->
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <!--顶栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_title_height"
+        android:background="@color/agmobile_white_dark">
+
+        <!--返回按钮-->
+        <LinearLayout
+            android:id="@+id/btn_activity_search_back"
+            style="@style/AGMobile.Widget.Button.Container.Dark"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/top_icon_margin_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                style="@style/AGMobile.Widget.ImageButton.TopBar"
+                android:src="@mipmap/common_ic_back" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/part_title_padding"
+            android:text="@string/title_search"
+            android:textColor="@color/agmobile_blue"
+            android:textSize="@dimen/text_size_first"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/agmobile_grey_0"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_title_height"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <com.augurit.am.cmpt.widget.segmentControlView.SegmentControlView
+            android:id="@+id/scv"
+            style="@style/AGMobile.Widget.SegmentControlView.Light"
+            android:layout_gravity="center"
+            app:scv_TextArray="@array/segment_control_arrays_search" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_content_for_searchview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</LinearLayout>

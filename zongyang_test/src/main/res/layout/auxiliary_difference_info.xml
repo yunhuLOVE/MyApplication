@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="归类名称"
+            android:paddingLeft="5dp"
+            android:textStyle="bold" />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="所占面积(m²)"
+            android:textStyle="bold" />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="图斑个数"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <View style="@style/AGMobile.Widget.View.DividerHorizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        >
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="两规均为非建设用地"/>
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:id="@+id/auxiliary_no_mj"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text="0" />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:id="@+id/auxiliary_no_count"
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="0"/>
+    </LinearLayout>
+    <View style="@style/AGMobile.Widget.View.DividerHorizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        >
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="两规均为建设用地"/>
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:id="@+id/auxiliary_build_mj"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text="0" />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:id="@+id/auxiliary_build_count"
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="0"/>
+    </LinearLayout>
+    <View style="@style/AGMobile.Widget.View.DividerHorizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        >
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="土规非建设用地，城规建设用地"/>
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:id="@+id/auxiliary_build_no_mj"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text="0" />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:id="@+id/auxiliary_build_no_count"
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="0"/>
+    </LinearLayout>
+    <View style="@style/AGMobile.Widget.View.DividerHorizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        >
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="土规建设用地，城规非建设用地"/>
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:id="@+id/auxiliary_no_build_mj"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text="0" />
+
+        <View style="@style/AGMobile.Widget.View.DividerVertical" />
+
+        <TextView
+            android:id="@+id/auxiliary_no_build_count"
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="0"/>
+    </LinearLayout>
+    <View style="@style/AGMobile.Widget.View.DividerHorizontal"/>
+</LinearLayout>
