@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    
+    
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+    <color name="bg_base">#F6F6F6</color>
+    <color name="text_gray">#999999</color>
+
+
+    <!--菜单栏、确认按钮、colorPrimary-->
+    <color name="blue">#0097ee</color>
+    <!--菜单选中高亮、tab选中、功能标题栏、colorAccent-->
+    <color name="blue_light">#0da6fe</color>
+    <!--二级标题栏（目前仅用于我的工作）、colorPrimaryDark-->
+    <color name="blue_deep">#038cdc</color>
+</resources>
