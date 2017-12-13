@@ -111,14 +111,14 @@ public class LoginActivity extends AppCompatActivity {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.btn_login:
                     doLogin();
                     break;
 
                 case R.id.iv_setting:
 
-                   Dialog dialog =  Dialog_Setting.getDialog(LoginActivity.this);
+                    Dialog dialog = Dialog_Setting.getDialog(LoginActivity.this);
                     break;
             }
         }
@@ -330,6 +330,7 @@ public class LoginActivity extends AppCompatActivity {
         protected TaskResult _doInBackground(TaskParams... params) {
             TaskParams param = params[0];
             publishProgress(getString(R.string.login_status_logging_in) + "...");
+
             try {
                 String username = param.getString("username");
                 String password = param.getString("password");
@@ -364,27 +365,27 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } else {
 
-                    isRightUser = NetworkHelper.getInstance(LoginActivity.this)
-                            .getHttpOpera(OmUserHttpOpera.class)
-                            .checkOmUser(uname, psw);
+//                    isRightUser = NetworkHelper.getInstance(LoginActivity.this)
+//                            .getHttpOpera(OmUserHttpOpera.class)
+//                            .checkOmUser(uname, psw);
 
                 }
-                if (isRightUser == null || !isRightUser) {
+                if (false  ) {//isRightUser == null || !isRightUser
 
                     if ("IOException".equals(loginResult)) {
                         msg = getString(R.string.login_status_ip_failure);
                     }
                     if ("SocketTimeoutException".equals(loginResult)) {
                         msg = getString(R.string.connection_timeout);
-                    }else{
+                    } else {
                         msg = getString(R.string.login_status_failure);
                     }
                     publishProgress(msg);
                     return TaskResult.FAILED;
                 } else {
 
-                    OmUserData omUser = op.getUserInfo(uname);// 根据登录名获取用户信息
-                    if (omUser != null
+                    OmUserData omUser = null;//op.getUserInfo(uname);// 根据登录名获取用户信息
+                    if (true || omUser != null
                             && omUser.getUserCode() != null) {
                         CurrentUser.getInstance().setCurrentUser(omUser);//
                         if (cb_rememberPsw.isChecked()) {
@@ -439,7 +440,8 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         msg = "用户名密码错误";
                         publishProgress(msg);
-                        return TaskResult.FAILED;
+                        return TaskResult.OK;
+//                        return TaskResult.FAILED;
                     }
                 }
             } catch (Exception e) {
@@ -503,7 +505,7 @@ public class LoginActivity extends AppCompatActivity {
                 final int what = msg.what;
                 Bundle msgBundle = msg.getData();
                 switch (what) {
-                    case R.id.tittle:
+                    case R.id.title:
                         dialog.setMessage("正在准备" + msgBundle.getString("msg")
                                 + "数据，请稍后...");
                         break;
@@ -528,7 +530,7 @@ public class LoginActivity extends AppCompatActivity {
         private void showDialogMessage(String msg) {
             Bundle bundle = new Bundle();
             bundle.putString("msg", msg);
-            Message message = this.handler.obtainMessage(R.id.tittle);
+            Message message = this.handler.obtainMessage(R.id.title);
             message.setData(bundle);
             message.sendToTarget();
         }
@@ -559,34 +561,35 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-        public  void regist(Context context) {
-            SharedPreferences setting = context
-                    .getSharedPreferences(SETTING_NEW, 0);
-            setting.edit().putBoolean(REGIST, true).commit();
+    public void regist(Context context) {
+        SharedPreferences setting = context
+                .getSharedPreferences(SETTING_NEW, 0);
+        setting.edit().putBoolean(REGIST, true).commit();
+    }
+
+    public static void unRegist(Context context) {
+        SharedPreferences setting = context
+                .getSharedPreferences(SETTING_NEW, 0);
+        setting.edit().putBoolean(REGIST, false).commit();
+    }
+
+    public boolean isRegist(Context context) {
+        SharedPreferences setting = context
+                .getSharedPreferences(SETTING_NEW, 0);
+        return setting.getBoolean(REGIST, false);
+    }
+
+    private void gotoMainView() {
+        // TODO Auto-generated method stub
+        this.regist(this);
+        if (et_username != null) {
+            updateProgress("");
+            et_username.setText("");
+            et_psw.setText("");
         }
 
-        public  void unRegist(Context context) {
-            SharedPreferences setting = context
-                    .getSharedPreferences(SETTING_NEW, 0);
-            setting.edit().putBoolean(REGIST, false).commit();
-        }
-
-        public  boolean isRegist(Context context) {
-            SharedPreferences setting = context
-                    .getSharedPreferences(SETTING_NEW, 0);
-            return setting.getBoolean(REGIST, false);
-        }
-
-        private void gotoMainView() {
-            // TODO Auto-generated method stub
-            this.regist(this);
-            if (et_username != null) {
-                updateProgress("");
-                et_username.setText("");
-                et_psw.setText("");
-            }
-
-            Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
-            startActivityForResult(intent, 0);
-        }
+        Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
+        startActivityForResult(intent, 0);
+        finish();
+    }
 }

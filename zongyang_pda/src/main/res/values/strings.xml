@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ZONGYANG_PDA</string>
 
-    <string name="default_base_url">220.180.112.67:10086</string>
+    <string name="default_base_url">192.168.1.112</string>
 
     <string name="user_name">用户名</string>
     <string name="password">密码</string>
@@ -25,4 +25,17 @@
 
 
     <string name="save">保存</string>
+    <string name="exit_app">确定要退出系统吗？</string>
+
+
+    <string name="item_work">我的工作</string>
+    <string name="item_project_search">项目查询</string>
+
+    <string name="title_activity_my_work">MyWorkActivity</string>
+    <string name="title_activity_my_work_tab">MyWorkTabActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

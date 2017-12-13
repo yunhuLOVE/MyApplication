@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.augur.zongyang.R;
 import com.augur.zongyang.activity.login.LoginActivity;
+import com.augur.zongyang.activity.mywork.MyWorkActivity;
 import com.augur.zongyang.adapter.MainMenuAdapter;
 import com.augur.zongyang.model.MainManuItemData;
 import com.augur.zongyang.util.constant.BundleKeyConstant;
@@ -53,18 +54,24 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        title = findViewById(R.id.tittle);
+        title = findViewById(R.id.title);
         back = findViewById(R.id.iv_back);
         gridView = findViewById(R.id.gridView);
     }
 
     private void initData() {
-        mainManuItemDatas = new ArrayList<>();
-        mainMenuAdapter = new MainMenuAdapter(mContext, mainManuItemDatas);
-        gridView.setAdapter(mainMenuAdapter);
-        back.setOnClickListener(clickListener);
-        gridView.setOnItemClickListener(itemClickListener);
-        updateUI();
+        try {
+            mContext = this;
+            title.setText("枞阳县‘多规合一’联合审批系统");
+            mainManuItemDatas = new ArrayList<>();
+            mainMenuAdapter = new MainMenuAdapter(mContext, mainManuItemDatas);
+            gridView.setAdapter(mainMenuAdapter);
+            back.setOnClickListener(clickListener);
+            gridView.setOnItemClickListener(itemClickListener);
+            updateUI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateUI() {
@@ -75,7 +82,7 @@ public class MainMenuActivity extends AppCompatActivity {
         {
             Bundle bundle = new Bundle();
             bundle.putString(BundleKeyConstant.TITLE, "我的工作");
-            addItem(R.mipmap.icon_work, R.drawable.item_work, R.string.item_work, 0, MainMenuActivity.class, bundle);
+            addItem(R.mipmap.icon_work, R.drawable.item_work, R.string.item_work, 0, MyWorkActivity.class, bundle);
         }
 
         /*
@@ -84,7 +91,7 @@ public class MainMenuActivity extends AppCompatActivity {
         {
             Bundle bundle = new Bundle();
             bundle.putString(BundleKeyConstant.TITLE, "项目查询");
-            addItem(R.mipmap.icon_work, R.drawable.item_project_search, R.string.item_project_search, 0, MainMenuActivity.class, bundle);
+            addItem(R.mipmap.icon_search, R.drawable.item_project_search, R.string.item_project_search, 0, MyWorkActivity.class, bundle);
         }
 
     }
@@ -165,7 +172,7 @@ public class MainMenuActivity extends AppCompatActivity {
     /*
     退出系统提示
      */
-    private void exit(){
+    private void exit() {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                 MainMenuActivity.this);
@@ -190,7 +197,6 @@ public class MainMenuActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         LoginActivity.unRegist(mContext);
                         MainMenuActivity.this.finish();
-                        System.exit(0);
                     }
                 }).setCancelable(false).create().show();
 

@@ -7,4 +7,6 @@ package com.augur.zongyang.util.constant;
 public class BundleKeyConstant {
 
     public static final String TITLE = "TITLE";//标题
+
+    public static final String POSITION = "POSITION";
 }

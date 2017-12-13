@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_base">
+    android:background="@color/bg_base"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/navigationBar"
@@ -11,13 +12,12 @@
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
         android:numColumns="2"
-        android:horizontalSpacing="10dp"
         android:verticalSpacing="10dp"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:listSelector="@drawable/grid_selector">
+        android:horizontalSpacing="10dp"/>
 
-    </GridView>
+
 </LinearLayout>
