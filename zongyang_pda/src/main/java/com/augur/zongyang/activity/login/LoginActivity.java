@@ -1,4 +1,4 @@
-package com.augur.zongyang;
+package com.augur.zongyang.activity.login;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -24,11 +24,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.augur.zongyang.R;
 import com.augur.zongyang.bean.CurrentUser;
 import com.augur.zongyang.bean.OmUserData;
 import com.augur.zongyang.common.SettingPreference;
 import com.augur.zongyang.manager.ToastManager;
-import com.augur.zongyang.menu.MainMenuActivity;
+import com.augur.zongyang.activity.menu.MainMenuActivity;
 import com.augur.zongyang.network.helper.NetworkHelper;
 import com.augur.zongyang.network.operator.OmUserHttpOpera;
 import com.augur.zongyang.network.operator.base.BaseHttpOpera;
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         initView();
         initData();
