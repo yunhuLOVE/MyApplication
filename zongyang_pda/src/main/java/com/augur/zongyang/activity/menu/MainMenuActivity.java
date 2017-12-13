@@ -1,4 +1,4 @@
-package com.augur.zongyang.menu;
+package com.augur.zongyang.activity.menu;
 
 import android.support.v7.app.AppCompatActivity;
 
@@ -7,4 +7,6 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class MainMenuActivity extends AppCompatActivity {
+
+
 }
