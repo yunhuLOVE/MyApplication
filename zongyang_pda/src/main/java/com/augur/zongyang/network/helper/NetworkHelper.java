@@ -2,6 +2,7 @@ package com.augur.zongyang.network.helper;
 
 import android.content.Context;
 
+import com.augur.zongyang.network.operator.MyWorkHttpOpera;
 import com.augur.zongyang.network.operator.OmUserHttpOpera;
 import com.augur.zongyang.network.operator.base.BaseHttpOpera;
 
@@ -14,7 +15,9 @@ public class NetworkHelper {
     private final Context context;
     private static NetworkHelper instance;
 
-    private static OmUserHttpOpera loginUserHttpOpera;
+    private static OmUserHttpOpera omUserHttpOpera;
+
+    private static MyWorkHttpOpera myWorkHttpOpera;
 
     private NetworkHelper(Context context) {
         this.context = context;
@@ -30,16 +33,25 @@ public class NetworkHelper {
     public <T> T getHttpOpera(Class<T> classT) {
         BaseHttpOpera resultHttpOpera = null;
         if(classT == OmUserHttpOpera.class){
-            resultHttpOpera = getLoginUserHttpOpera();
+            resultHttpOpera = getOmUserHttpOpera();
+        }else if (classT == MyWorkHttpOpera.class){
+            resultHttpOpera = getMyWorkHttpOpera();
         }
         return (T)resultHttpOpera;
     }
 
 
-    private OmUserHttpOpera getLoginUserHttpOpera() {
-        if (this.loginUserHttpOpera == null) {
-            this.loginUserHttpOpera = new OmUserHttpOpera(context, null);
+    private OmUserHttpOpera getOmUserHttpOpera() {
+        if (this.omUserHttpOpera == null) {
+            this.omUserHttpOpera = new OmUserHttpOpera(context, null);
         }
-        return this.loginUserHttpOpera;
+        return this.omUserHttpOpera;
+    }
+
+    private MyWorkHttpOpera getMyWorkHttpOpera(){
+        if(this.myWorkHttpOpera == null){
+            this.myWorkHttpOpera = new MyWorkHttpOpera(context, null);
+        }
+        return this.myWorkHttpOpera;
     }
 }

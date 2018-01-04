@@ -94,8 +94,10 @@ public class Dialog_Setting {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("ip", et_url.getText().toString());
                 boolean isSuccess = editor.commit();
-                if(isSuccess)
+                if(isSuccess) {
                     ToastManager.getInstance(activity).shortCenterToast("保存成功！");
+                    dialog.dismiss();
+                }
                 else
                     ToastManager.getInstance(activity).shortCenterToast("保存失败，请重试！");
             }

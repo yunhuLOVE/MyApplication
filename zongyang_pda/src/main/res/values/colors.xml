@@ -7,8 +7,11 @@
     
     <color name="black">#000</color>
     <color name="white">#fff</color>
+    <color name="red">#ff0000</color>
+
     <color name="bg_base">#F6F6F6</color>
-    <color name="text_gray">#999999</color>
+    <color name="text_gray">#8e8e8e</color>
+    <color name="text_dark_gray">#545454</color>
 
 
     <!--菜单栏、确认按钮、colorPrimary-->
@@ -17,4 +20,13 @@
     <color name="blue_light">#0da6fe</color>
     <!--二级标题栏（目前仅用于我的工作）、colorPrimaryDark-->
     <color name="blue_deep">#038cdc</color>
+
+    <color name="green">#59BA5D</color>
+
+    <color name="orange_yellow">#FE9A44</color>
+
+    <color name="orange_red">#FE7457</color>
+
+    <!--分割线-->
+    <color name = "divider_gray">#AAAAAA</color>
 </resources>

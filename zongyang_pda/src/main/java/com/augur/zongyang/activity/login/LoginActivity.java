@@ -1,6 +1,5 @@
 package com.augur.zongyang.activity.login;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,11 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.augur.zongyang.R;
+import com.augur.zongyang.activity.menu.MainMenuActivity;
 import com.augur.zongyang.bean.CurrentUser;
+import com.augur.zongyang.bean.LoginUserAllInfo;
 import com.augur.zongyang.bean.OmUserData;
 import com.augur.zongyang.common.SettingPreference;
 import com.augur.zongyang.manager.ToastManager;
-import com.augur.zongyang.activity.menu.MainMenuActivity;
 import com.augur.zongyang.network.helper.NetworkHelper;
 import com.augur.zongyang.network.operator.OmUserHttpOpera;
 import com.augur.zongyang.network.operator.base.BaseHttpOpera;
@@ -38,7 +38,6 @@ import com.augur.zongyang.task.TaskAdapter;
 import com.augur.zongyang.task.TaskListener;
 import com.augur.zongyang.task.TaskParams;
 import com.augur.zongyang.task.TaskResult;
-import com.augur.zongyang.util.constant.AppConstant;
 import com.augur.zongyang.util.db.SqliteTemplate;
 import com.augur.zongyang.widget.Dialog_Setting;
 
@@ -118,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 case R.id.iv_setting:
 
-                    Dialog dialog = Dialog_Setting.getDialog(LoginActivity.this);
+                    Dialog_Setting.getDialog(LoginActivity.this);
                     break;
             }
         }
@@ -347,47 +346,26 @@ public class LoginActivity extends AppCompatActivity {
                 String userName = username.trim();
                 String psw = password.trim();
                 String uname = URLEncoder.encode(userName, "UTF-8");
-                Boolean isRightUser = false;
-                String loginResult = "";
-                if (AppConstant.OLDLOGIN) {
-                    String checkResult = op.loginChecked(username.trim(),
-                            password.trim());
-                    if ("IOException".equals(checkResult)) {
-                        msg = getString(R.string.login_status_ip_failure);
-                        publishProgress(msg);
-                        return TaskResult.FAILED;
-                    } else if ("false".equals(checkResult)) {
-                        msg = getString(R.string.login_status_failure);
-                        publishProgress(msg);
-                        return TaskResult.FAILED;
-                    } else {
-                        isRightUser = true;
-                    }
-                } else {
 
-//                    isRightUser = NetworkHelper.getInstance(LoginActivity.this)
-//                            .getHttpOpera(OmUserHttpOpera.class)
-//                            .checkOmUser(uname, psw);
+                /*
+                登录反馈信息
+                 */
+                LoginUserAllInfo loginInfo = NetworkHelper.getInstance(LoginActivity.this)
+                        .getHttpOpera(OmUserHttpOpera.class)
+                        .checkOmUser(uname, psw);
 
-                }
-                if (false  ) {//isRightUser == null || !isRightUser
-
-                    if ("IOException".equals(loginResult)) {
-                        msg = getString(R.string.login_status_ip_failure);
-                    }
-                    if ("SocketTimeoutException".equals(loginResult)) {
-                        msg = getString(R.string.connection_timeout);
-                    } else {
-                        msg = getString(R.string.login_status_failure);
-                    }
+                if (loginInfo == null || !loginInfo.isSuccess()) {
+                    msg = getString(R.string.login_status_failure);
                     publishProgress(msg);
                     return TaskResult.FAILED;
                 } else {
-
-                    OmUserData omUser = null;//op.getUserInfo(uname);// 根据登录名获取用户信息
-                    if (true || omUser != null
+                    OmUserData omUser = null;
+                    if(loginInfo.getResult() != null && loginInfo.getResult().getUser() != null)
+                        omUser = loginInfo.getResult().getUser();
+                    if (omUser != null
                             && omUser.getUserCode() != null) {
-                        CurrentUser.getInstance().setCurrentUser(omUser);//
+                        //将用户信息保存为静态资源(单例模式)
+                        CurrentUser.getInstance().setCurrentUser(omUser);
                         if (cb_rememberPsw.isChecked()) {
                             SharedPreferences setting = getSharedPreferences(
                                     SETTING_NEW, 0);
@@ -499,7 +477,7 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
         }
 
-        Handler handler = new Handler() {
+         Handler handler = new Handler() {
             @Override
             public void handleMessage(final Message msg) {
                 final int what = msg.what;

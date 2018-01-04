@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/fileName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:text="文件名称"/>
+    <TextView
+        android:id="@+id/uploadPerson"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:text="上传人"/>
+    <TextView
+        android:id="@+id/uploadTime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:text="上传时间"/>
+</LinearLayout>

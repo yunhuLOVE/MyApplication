@@ -18,7 +18,12 @@ import com.augur.zongyang.R;
 import com.augur.zongyang.activity.login.LoginActivity;
 import com.augur.zongyang.activity.mywork.MyWorkActivity;
 import com.augur.zongyang.adapter.MainMenuAdapter;
+import com.augur.zongyang.bean.CurrentUser;
 import com.augur.zongyang.model.MainManuItemData;
+import com.augur.zongyang.model.result.TaskListResult;
+import com.augur.zongyang.network.helper.NetworkHelper;
+import com.augur.zongyang.network.operator.MyWorkHttpOpera;
+import com.augur.zongyang.util.asynctask.GetDataFromNetAsyncTask;
 import com.augur.zongyang.util.constant.BundleKeyConstant;
 
 import java.util.ArrayList;
@@ -29,6 +34,8 @@ import java.util.List;
  */
 
 public class MainMenuActivity extends AppCompatActivity {
+
+    private String TAG = "MainMenuActivity";
 
     //上下文
     private Context mContext;
@@ -43,6 +50,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private List<MainManuItemData> mainManuItemDatas;
     //带单适配器
     private MainMenuAdapter mainMenuAdapter;
+
+    private int count_0,count_1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,20 +78,49 @@ public class MainMenuActivity extends AppCompatActivity {
             back.setOnClickListener(clickListener);
             gridView.setOnItemClickListener(itemClickListener);
             updateUI();
+            getTaskNum();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void updateUI() {
+    private void getTaskNum(){
+        //待办
+        getCount(0);
+        //在办
+        getCount(1);
+    }
 
+    private void updateUI() {
+        mainManuItemDatas = new ArrayList<>();
         /*
-        我的工作
+        待办
          */
         {
             Bundle bundle = new Bundle();
-            bundle.putString(BundleKeyConstant.TITLE, "我的工作");
-            addItem(R.mipmap.icon_work, R.drawable.item_work, R.string.item_work, 0, MyWorkActivity.class, bundle);
+            bundle.putInt(BundleKeyConstant.TYPE,0);
+            bundle.putString(BundleKeyConstant.TITLE, "待办");
+            addItem(R.mipmap.item_not_to_do, R.drawable.item_blue, R.string.item_not_to_do, count_0, MyWorkActivity.class, bundle);
+        }
+
+        /*
+        在办
+         */
+        {
+            Bundle bundle = new Bundle();
+            bundle.putInt(BundleKeyConstant.TYPE,1);
+            bundle.putString(BundleKeyConstant.TITLE, "在办");
+            addItem(R.mipmap.icon_work, R.drawable.item_green, R.string.item_doing, count_1, MyWorkActivity.class, bundle);
+        }
+
+        /*
+        已办
+         */
+        {
+            Bundle bundle = new Bundle();
+            bundle.putInt(BundleKeyConstant.TYPE,2);
+            bundle.putString(BundleKeyConstant.TITLE, "已办");
+            addItem(R.mipmap.item_have_to_do, R.drawable.item_orange_red, R.string.item_have_to_do, 0, MyWorkActivity.class, bundle);
         }
 
         /*
@@ -90,9 +128,12 @@ public class MainMenuActivity extends AppCompatActivity {
          */
         {
             Bundle bundle = new Bundle();
+            bundle.putInt(BundleKeyConstant.POSITION,2);
             bundle.putString(BundleKeyConstant.TITLE, "项目查询");
-            addItem(R.mipmap.icon_search, R.drawable.item_project_search, R.string.item_project_search, 0, MyWorkActivity.class, bundle);
+            addItem(R.mipmap.icon_search, R.drawable.item_orange_yellow, R.string.item_project_search, 0, MyWorkActivity.class, bundle);
         }
+
+        mainMenuAdapter.setData(this.mainManuItemDatas);
 
     }
 
@@ -200,5 +241,61 @@ public class MainMenuActivity extends AppCompatActivity {
                     }
                 }).setCancelable(false).create().show();
 
+    }
+
+    /*
+        获取数据列表
+         */
+    private void getCount(final int type) {
+
+        new GetDataFromNetAsyncTask<TaskListResult, String>(mContext, null,
+                new GetDataFromNetAsyncTask.GetDataFromNetAsyncTaskListener<TaskListResult, String>() {
+                    @Override
+                    public TaskListResult getResult(String... params) {
+
+                        if (type == 0)
+                            return NetworkHelper
+                                    .getInstance(mContext)
+                                    .getHttpOpera(MyWorkHttpOpera.class)
+                                    .getDoingTaskList(
+                                            CurrentUser.getInstance()
+                                                    .getCurrentUser()
+                                                    .getLoginName());
+
+                        return NetworkHelper
+                                .getInstance(mContext)
+                                .getHttpOpera(MyWorkHttpOpera.class)
+                                .getNotToDoTaskList(
+                                        CurrentUser.getInstance()
+                                                .getCurrentUser()
+                                                .getLoginName());
+                    }
+
+                    @Override
+                    public void onSuccess(TaskListResult taskListResult) {
+
+                        if(taskListResult.getResult() != null){
+                            int size = taskListResult.getResult().size();
+//                            Log.e(TAG,"size:"+size);
+                            switch (type){
+                                case 0://待办
+                                    count_0 = size;
+                                    updateUI();
+                                    break;
+                                case 1://在办
+                                    count_1 = size;
+                                    updateUI();
+                                    break;
+                            }
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFail() {
+
+                    }
+                }).execute();
     }
 }

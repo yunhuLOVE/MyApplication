@@ -1,9 +1,9 @@
 package com.augur.zongyang.network.api;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.augur.zongyang.R;
-import com.augur.zongyang.common.SettingPreference;
 
 import java.util.Map;
 
@@ -17,7 +17,8 @@ public class WebServiceApi {
 
     private static WebServiceApi instance;
     private Context context;
-    private SettingPreference settingPreference;
+    private SharedPreferences sharedPreferences;
+//    private SettingPreference settingPreference;
     private final String strHead = "http://";
     private final String strSupport = "/agsupport";
     private final String strRest = "/rest";
@@ -39,19 +40,22 @@ public class WebServiceApi {
 
     private WebServiceApi(Context context) {
         this.context = context;
-        settingPreference = new SettingPreference(context);
+        sharedPreferences = context.getSharedPreferences("sp_ip", Context.MODE_PRIVATE);
+//        settingPreference = new SettingPreference(context);
         this.refreshSetting();
     }
 
     public void refreshSetting() {
         // TODO Auto-generated method stub
-        IP = settingPreference.getPreferences().getString("setting_ip",
-                context.getString(R.string.default_base_url));
+//        IP = settingPreference.getPreferences().getString("setting_ip",
+//                context.getString(R.string.default_base_url));
+        IP = sharedPreferences.getString("ip", context.getString(R.string.default_base_url));
+
     }
 
     public String getAPI_SSO() {
         if (API_SSO == null || API_SSO.equals("")) {
-            API_SSO = this.getAgSupportUrl() + "/enable_sso";
+            API_SSO = this.getDgspUrl() + "/enable_sso";
         }
         return API_SSO;
     }
@@ -73,19 +77,23 @@ public class WebServiceApi {
         return strHead + IP;
     }
 
-    public String getAgSupportUrl() {
-        return this.getBaseUrl() + "/agsupport";
+    public String getDgspUrl() {
+        return this.getBaseUrl() + "/dgsp";
     }
 
     private String getRestUrl() {
-        return this.getAgSupportUrl() + strRest + urlDivider;
+        return this.getDgspUrl() + strRest + urlDivider;
+    }
+
+    private String getPdaHandleUrl(){
+        return this.getRestUrl() + "pdaHandle" + urlDivider;
     }
 
 
     // 首次登录
     public String getAPI_GET_CHECK_USER() {
         // TODO Auto-generated method stub
-        return this.getRestUrl() + "user/checkLoginInfo";
+        return this.getPdaHandleUrl() + "loginValidate";
 
     }
 
@@ -99,5 +107,45 @@ public class WebServiceApi {
     public String getAPI_USER_INFO() {
         // TODO Auto-generated method stub
         return this.getRestUrl() + "user";
+    }
+
+    private String getAfsSysFileUrl() {
+        return this.getPdaHandleUrl() + this.urlDivider + "afs-sys-file!";
+    }
+
+    // gallery下载图片
+    public String getAPI_IMAGEREAD() {
+        // TODO Auto-generated method stub
+        return this.getAfsSysFileUrl() + "readAttachment.action";
+    }
+
+    //任务签收
+    public String getAPI_GET_TASK_SIGN(){
+        return this.getPdaHandleUrl() + "signTask";
+    }
+
+    //获取待办列表
+    public String getAPI_GET_TASK_LIST_NOT_TO_DO(){
+        return this.getPdaHandleUrl() + "getDbSummary";
+    }
+
+    //获取在办列表
+    public String getAPI_GET_TASK_LIST_DOING(){
+        return this.getPdaHandleUrl() + "getZbSummary";
+    }
+
+    // 获取附件列表
+    public String getAPI_GET_ATTACHMENT_LIST_DATA() {
+        return this.getPdaHandleUrl() + "attachment/getAttachments";
+    }
+
+    // 上传文件
+    public String getAPI_GET_UPLOAD_FILE() {
+        return this.getPdaHandleUrl() + "attachment/uploadFiles";
+    }
+
+    // 删除附件
+    public String getAPI_GET_DELETE_FILE() {
+        return this.getPdaHandleUrl() + "attachment/deleteFiles";
     }
 }

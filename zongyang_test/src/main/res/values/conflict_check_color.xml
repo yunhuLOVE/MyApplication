@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--冲突检测使用颜色-->
-    <color name="both_for_build_use_area_color">@color/pink</color>
-    <color name="both_not_for_build_use_area_color">@color/agmobile_grey_0</color>
-    <color name="city_build_use_area_color">@color/mark_dark_purple</color>
-    <color name="land_build_use_area_color">@color/mark_light_purple</color>
-</resources>

@@ -30,4 +30,6 @@ public class MyWorkFragmentPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mList.size();
     }
+
+
 }

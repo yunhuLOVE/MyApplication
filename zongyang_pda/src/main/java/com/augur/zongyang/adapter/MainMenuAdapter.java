@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.augur.zongyang.R;
@@ -18,7 +18,9 @@ import java.util.List;
  * Created by yunhu on 2017-12-13.
  */
 
-public class MainMenuAdapter extends BaseAdapter{
+public class MainMenuAdapter extends BaseAdapter {
+
+    private String TAG = "MainMenuAdapter";
 
     private LayoutInflater mInflater;
     private Context context;
@@ -28,6 +30,11 @@ public class MainMenuAdapter extends BaseAdapter{
         mInflater = LayoutInflater.from(context);
         this.context = context;
         this.datas = datas;
+    }
+
+    public void setData(List<MainManuItemData> datas){
+        this.datas = datas;
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -56,31 +63,40 @@ public class MainMenuAdapter extends BaseAdapter{
             convertView = mInflater.inflate(R.layout.item_main_menu, parent,
                     false);
             viewHolder = new ViewHolder();
-            viewHolder.linear = (LinearLayout) convertView
-                    .findViewById(R.id.linearLayout);
-            viewHolder.mTextView = (TextView) convertView
+            viewHolder.relayout = convertView
+                    .findViewById(R.id.relativeLayout1);
+            viewHolder.mTextView = convertView
                     .findViewById(R.id.textView);
-            viewHolder.imageView = (ImageView) convertView
+            viewHolder.imageView = convertView
                     .findViewById(R.id.imageView7);
+            viewHolder.tv_count = convertView.findViewById(R.id.tv_count);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.mTextView.setText(datas.get(position).getTextId());
-        if (!(datas.get(position).getBgId() + "".trim()).equals("null"))
-            viewHolder.linear.setBackgroundResource(datas.get(position)
-                    .getBgId());
+        MainManuItemData data = datas.get(position);
 
-        viewHolder.imageView.setImageResource(datas.get(position).getImageId());
+        viewHolder.mTextView.setText(data.getTextId());
+        if (!(datas.get(position).getBgId() + "".trim()).equals("null"))
+            viewHolder.relayout.setBackgroundResource(data.getBgId());
+
+        viewHolder.imageView.setImageResource(data.getImageId());
+//        Log.e(TAG, "data.count:" + datas.get(position).getCount());
+        if (datas.get(position).getCount() > 0) {
+            viewHolder.tv_count.setVisibility(View.VISIBLE);
+            viewHolder.tv_count.setText(String.valueOf(data.getCount()));
+        }
+
 
         return convertView;
     }
 
     private final class ViewHolder {
-        LinearLayout linear;
+        RelativeLayout relayout;
         TextView mTextView;
         ImageView imageView;
+        TextView tv_count;//案件数目
     }
 
 

@@ -26,6 +26,8 @@ public class MyWorkActivity extends AppCompatActivity implements View.OnClickLis
     private TextView tabTitle3;
     private ViewPager myViewPager;
 
+    private int type;//案件类型 0：待办，1：在办，2：已办
+
     private List<Fragment> list;
     private MyWorkFragmentPagerAdapter adapter;
 
@@ -49,7 +51,8 @@ public class MyWorkActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initData() {
-        title.setText(getIntent().getExtras().getString(BundleKeyConstant.TITLE,""));
+        type = getIntent().getExtras().getInt(BundleKeyConstant.TYPE,0);
+        title.setText("我的工作");
         back.setOnClickListener(this);
         tabTitle1.setOnClickListener(this);
         tabTitle2.setOnClickListener(this);
@@ -65,8 +68,19 @@ public class MyWorkActivity extends AppCompatActivity implements View.OnClickLis
         list.add(fragment3);
         adapter = new MyWorkFragmentPagerAdapter(getSupportFragmentManager(),list);
         myViewPager.setAdapter(adapter);
-        myViewPager.setCurrentItem(0);
-        tabTitle1.setBackgroundColor(getResources().getColor(R.color.blue_deep));
+        myViewPager.setCurrentItem(type);
+        switch (type){
+            case 0:
+                tabTitle1.setBackgroundColor(getResources().getColor(R.color.blue_deep));
+                break;
+            case 1:
+                tabTitle2.setBackgroundColor(getResources().getColor(R.color.blue_deep));
+                break;
+            case 2:
+                tabTitle3.setBackgroundColor(getResources().getColor(R.color.blue_deep));
+                break;
+        }
+
     }
 
     @Override

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ZONGYANG_PDA</string>
 
-    <string name="default_base_url">192.168.1.112</string>
+    <string name="default_base_url">192.168.1.110:10086</string>
 
     <string name="user_name">用户名</string>
     <string name="password">密码</string>
@@ -26,10 +26,43 @@
 
     <string name="save">保存</string>
     <string name="exit_app">确定要退出系统吗？</string>
+    <string name="submit">提交</string>
 
 
     <string name="item_work">我的工作</string>
+    <string name="item_not_to_do">待办事项</string>
+    <string name="item_doing">在办事项</string>
+    <string name="item_have_to_do">已办事项</string>
     <string name="item_project_search">项目查询</string>
+
+    <string name="not_to_do">待办</string>
+    <string name="doing">在办</string>
+    <string name="have_to_do">已办</string>
+
+    <!--项目基本信息-->
+    <string name="basis_info">基本信息</string>
+    <string name="item_no">项目编号:</string>
+    <string name="project_name">项目名称:</string>
+    <string name="project_category">项目类别:</string>
+    <string name="project_class_small">项目小类:</string>
+    <string name="construction_content">建设内容:</string>
+    <string name="legal_representative">法人代表:</string>
+    <string name="construction_unit">建设单位:</string>
+    <string name="unit_address">单位地址:</string>
+    <string name="competent_department">主管部门:</string>
+    <string name="land_nature">用地性质:</string>
+    <string name="construction_land_area">建设用地面积(㎡):</string>
+    <string name="construction_area">建筑面积(㎡):</string>
+    <string name="investment_total">总投资(万元):</string>
+    <string name="funding_source">资金来源:</string>
+    <string name="area">所属区域:</string>
+    <string name="choose_location">拟选位置:</string>
+    <string name="limit_age_begin_construction">建设开始年限:</string>
+    <string name="limit_age_complete_construction">建设完成年限:</string>
+    <string name="land_ownership">土地权属:</string>
+    <string name="project_summary">工程概况:</string>
+    <string name="contact">联系人:</string>
+    <string name="contact_phone">联系电话:</string>
 
     <string name="title_activity_my_work">MyWorkActivity</string>
     <string name="title_activity_my_work_tab">MyWorkTabActivity</string>
