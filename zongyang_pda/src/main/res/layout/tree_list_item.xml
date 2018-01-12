@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:minHeight="40dip"
     android:background="@color/bg_base">
+
+
+    <ImageView
+        android:id="@+id/id_treenode_upload"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:visibility="invisible"
+        app:srcCompat="@mipmap/tree_upload" />
 
     <ImageView
         android:id="@+id/id_treenode_icon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/id_treenode_upload"
+        android:layout_marginLeft="15dp"
         android:src="@mipmap/tree_ec" />
 
     <TextView
         android:id="@+id/id_treenode_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_toRightOf="@id/id_treenode_icon"
         android:textSize="18dip"
         android:textColor="@color/black"/>
+
+
 
 </RelativeLayout>

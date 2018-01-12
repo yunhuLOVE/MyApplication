@@ -527,7 +527,7 @@ public class AttachmentListActivity extends AppCompatActivity implements View.On
                                 .getInstance(context)
                                 .getHttpOpera(
                                         MyWorkHttpOpera.class)
-                                .getDeleteFile(userId, sysFileId);
+                                .getDeleteFile(userId, sysFileId+"");
                     }
 
                     @Override

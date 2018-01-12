@@ -15,6 +15,15 @@ public class CustomTreeForm implements Serializable{
     private static final long serialVersionUID = 6047013658000048613L;
 
     private String id;
+
+    private String name;
+
+    private String fileType;
+
+    private String fileFormat;
+
+    private String memo1;
+
     private String  isCommon ;
     private String  isDeleted ;
     private String  code ;//节点CODe
@@ -33,6 +42,39 @@ public class CustomTreeForm implements Serializable{
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+    public String getFileFormat() {
+        return fileFormat;
+    }
+
+    public void setFileFormat(String fileFormat) {
+        this.fileFormat = fileFormat;
+    }
+
+    public String getMemo1() {
+        return memo1;
+    }
+
+    public void setMemo1(String memo1) {
+        this.memo1 = memo1;
+    }
+
     public String getIsCommon() {
         return isCommon;
     }

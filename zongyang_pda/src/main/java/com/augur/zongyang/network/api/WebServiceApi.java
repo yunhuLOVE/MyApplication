@@ -119,11 +119,6 @@ public class WebServiceApi {
         return this.getAfsSysFileUrl() + "readAttachment.action";
     }
 
-    //任务签收
-    public String getAPI_GET_TASK_SIGN(){
-        return this.getPdaHandleUrl() + "signTask";
-    }
-
     //获取待办列表
     public String getAPI_GET_TASK_LIST_NOT_TO_DO(){
         return this.getPdaHandleUrl() + "getDbSummary";
@@ -132,6 +127,36 @@ public class WebServiceApi {
     //获取在办列表
     public String getAPI_GET_TASK_LIST_DOING(){
         return this.getPdaHandleUrl() + "getZbSummary";
+    }
+
+    //项目详情
+    public String getAPI_GET_PROJECT_INFO(){
+        return this.getPdaHandleUrl() + "projectInfo";
+    }
+
+    //任务签收
+    public String getAPI_GET_TASK_SIGN(){
+        return this.getPdaHandleUrl() + "signTask";
+    }
+
+    //获取发送信息
+    public String get_SEND_BASE_INFO(){
+        return getPdaHandleUrl() + "showWfSendWin";
+    }
+
+    //获取下一环节参与人列表
+    public String get_NEXT_LINK_PERSON_LIST(){
+        return this.getPdaHandleUrl() + "getAssigneeRange";
+    }
+
+    //发送在办流程信息
+    public String get_SENG_LINK_DOING_CONTENT(){
+        return this.getPdaHandleUrl() + "wfsend";
+    }
+
+    //获取附件目录
+    public String getATTACHMENT_CATELOG(){
+        return this.getPdaHandleUrl() + "getFileDirFormByTemplateCode";
     }
 
     // 获取附件列表

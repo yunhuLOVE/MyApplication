@@ -7,7 +7,7 @@ import java.util.List;
  * Created by yunhu on 2017-12-19.
  */
 
-public class TaskDetailInfoModel implements Serializable{
+public class TaskDetailInfoModel implements Serializable {
 
     private String activityName;//当前节点名称   ""
     private String activityChineseName;//当前环节
@@ -66,6 +66,15 @@ public class TaskDetailInfoModel implements Serializable{
     private String templateName;//审批流程'
     private String templateTypeName;//审批流程类别
     private Long wfBusInstanceId;
+
+    private List<LinkInfoModel> freeActivities;//环节信息列表
+
+    private String message;
+    private String name;
+    private boolean needSelectAssignee;//是否需要显示下一环节选择框
+    private Long nextTaskInstanceDbid;
+    private List<NextLinkInfoModel> nextTransitions;//下一环节信息
+
 
     public String getActivityName() {
         return activityName;
@@ -441,5 +450,53 @@ public class TaskDetailInfoModel implements Serializable{
 
     public void setWfBusInstanceId(Long wfBusInstanceId) {
         this.wfBusInstanceId = wfBusInstanceId;
+    }
+
+    public List<LinkInfoModel> getFreeActivities() {
+        return freeActivities;
+    }
+
+    public void setFreeActivities(List<LinkInfoModel> freeActivities) {
+        this.freeActivities = freeActivities;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isNeedSelectAssignee() {
+        return needSelectAssignee;
+    }
+
+    public void setNeedSelectAssignee(boolean needSelectAssignee) {
+        this.needSelectAssignee = needSelectAssignee;
+    }
+
+    public Long getNextTaskInstanceDbid() {
+        return nextTaskInstanceDbid;
+    }
+
+    public void setNextTaskInstanceDbid(Long nextTaskInstanceDbid) {
+        this.nextTaskInstanceDbid = nextTaskInstanceDbid;
+    }
+
+    public List<NextLinkInfoModel> getNextTransitions() {
+        return nextTransitions;
+    }
+
+    public void setNextTransitions(List<NextLinkInfoModel> nextTransitions) {
+        this.nextTransitions = nextTransitions;
     }
 }

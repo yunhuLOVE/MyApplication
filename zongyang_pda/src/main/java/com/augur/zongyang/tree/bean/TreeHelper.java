@@ -28,7 +28,7 @@ public class TreeHelper {
         List<Node> result = new ArrayList<Node>();
         // 将用户数据转化为List<Node>以及设置Node间关系
         List<Node> nodes = convetData2Node(datas);
-        // 拿到根节点
+        // 拿到根节点(parent != null)
         List<Node> rootNodes = getRootNodes(nodes);
         // 排序
         for (Node node : rootNodes) {

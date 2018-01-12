@@ -64,12 +64,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/projectCode"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -103,12 +104,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/projectName"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -142,12 +144,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/mainClass"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -181,12 +184,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/subClass"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -220,12 +224,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/construction_content"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -259,12 +264,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/legal_representative"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -298,12 +304,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/construction_unit"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -337,12 +344,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/unit_address"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -376,12 +384,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/competent_department"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -415,12 +424,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/land_nature"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -454,12 +464,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/construction_land_area"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -493,12 +504,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/construction_area"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -532,12 +544,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/investment_total"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -571,12 +584,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/funding_source"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -610,12 +624,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/area"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -649,12 +664,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/choose_location"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -688,12 +704,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/limit_age_begin_construction"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -727,12 +744,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/limit_age_complete_construction"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -766,12 +784,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/land_ownership"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -805,12 +824,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/project_summary"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -844,12 +864,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/contact"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -883,12 +904,13 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/contact_phone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="4"
                             android:background="@null"
-                            android:text="合肥建设公司"
+                            android:enabled="false"
                             android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </LinearLayout>

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.augur.zongyang.R;
 import com.augur.zongyang.adapter.MyWorkFragmentPagerAdapter;
+import com.augur.zongyang.fragment.AttachmentCatalogFragment;
 import com.augur.zongyang.fragment.TaskDetailFragment;
 
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         myViewPager.setOnPageChangeListener(new MyPageChangedListener());
 
         TaskDetailFragment fragment1 = TaskDetailFragment.newInstance(0);
-        TaskDetailFragment fragment2 = TaskDetailFragment.newInstance(1);
+
+        AttachmentCatalogFragment fragment2 = AttachmentCatalogFragment.newInstance();
         TaskDetailFragment fragment3 = TaskDetailFragment.newInstance(2);
         list = new ArrayList<>();
         list.add(fragment1);

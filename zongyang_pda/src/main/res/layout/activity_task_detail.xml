@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="@color/blue"
-            android:text="历史意见"
+            android:text="审批附件"
             android:textColor="@color/white"/>
 
         <TextView

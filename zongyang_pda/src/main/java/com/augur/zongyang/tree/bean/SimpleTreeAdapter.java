@@ -30,6 +30,7 @@ public class SimpleTreeAdapter<T> extends TreeListViewAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.tree_list_item, parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.upload = convertView.findViewById(R.id.id_treenode_upload);
             viewHolder.icon = (ImageView) convertView.findViewById(R.id.id_treenode_icon);
             viewHolder.label = (TextView) convertView.findViewById(R.id.id_treenode_label);
             convertView.setTag(viewHolder);
@@ -37,6 +38,10 @@ public class SimpleTreeAdapter<T> extends TreeListViewAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        //子节点为叶子节点时，显示上传文件按钮
+        if (node.getChildren() != null && node.getChildren().size() > 0 && node.getChildren().get(0).isLeaf())
+            viewHolder.upload.setVisibility(View.VISIBLE);
 
         if (node.getIcon() == -1) {
             viewHolder.icon.setVisibility(View.INVISIBLE);
@@ -51,6 +56,7 @@ public class SimpleTreeAdapter<T> extends TreeListViewAdapter {
     }
 
     private final class ViewHolder {
+        ImageView upload;
         ImageView icon;
         TextView label;
     }

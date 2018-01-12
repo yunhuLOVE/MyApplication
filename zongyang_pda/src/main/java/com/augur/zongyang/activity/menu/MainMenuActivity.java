@@ -252,23 +252,24 @@ public class MainMenuActivity extends AppCompatActivity {
                 new GetDataFromNetAsyncTask.GetDataFromNetAsyncTaskListener<TaskListResult, String>() {
                     @Override
                     public TaskListResult getResult(String... params) {
-
-                        if (type == 0)
+                        String loginName = "";
+                        if(CurrentUser.getInstance() != null && CurrentUser.getInstance().getCurrentUser() != null
+                                && CurrentUser.getInstance().getCurrentUser().getLoginName() != null)
+                            loginName = CurrentUser.getInstance()
+                                    .getCurrentUser()
+                                    .getLoginName();
+                        if (type == 0){
                             return NetworkHelper
                                     .getInstance(mContext)
                                     .getHttpOpera(MyWorkHttpOpera.class)
-                                    .getDoingTaskList(
-                                            CurrentUser.getInstance()
-                                                    .getCurrentUser()
-                                                    .getLoginName());
+                                    .getDoingTaskList(loginName);
+                        }
+
 
                         return NetworkHelper
                                 .getInstance(mContext)
                                 .getHttpOpera(MyWorkHttpOpera.class)
-                                .getNotToDoTaskList(
-                                        CurrentUser.getInstance()
-                                                .getCurrentUser()
-                                                .getLoginName());
+                                .getNotToDoTaskList(loginName);
                     }
 
                     @Override
