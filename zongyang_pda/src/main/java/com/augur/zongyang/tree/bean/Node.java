@@ -22,7 +22,7 @@ public class Node {
     private String itemId;
 
     /**
-     *  当前的级别
+     * 当前的级别
      */
     private int level;
 
@@ -36,19 +36,17 @@ public class Node {
     /**
      * 下一级的子Node
      */
-    private List<Node> children = new ArrayList<Node>();
+    private List<Node> children = new ArrayList<>();
 
     /**
      * 父Node
      */
     private Node parent;
 
-    public Node()
-    {
+    public Node() {
     }
 
-    public Node(String id, String pId, String name,String projectId,String itemId)
-    {
+    public Node(String id, String pId, String name, String projectId, String itemId) {
         super();
         this.id = id;
         this.pId = pId;
@@ -57,38 +55,31 @@ public class Node {
         this.itemId = itemId;
     }
 
-    public int getIcon()
-    {
+    public int getIcon() {
         return icon;
     }
 
-    public void setIcon(int icon)
-    {
+    public void setIcon(int icon) {
         this.icon = icon;
     }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getpId()
-    {
+    public String getpId() {
         return pId;
     }
 
-    public void setpId(String pId)
-    {
+    public void setpId(String pId) {
         this.pId = pId;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -108,38 +99,31 @@ public class Node {
         this.itemId = itemId;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setLevel(int level)
-    {
+    public void setLevel(int level) {
         this.level = level;
     }
 
-    public boolean isExpand()
-    {
+    public boolean isExpand() {
         return isExpand;
     }
 
-    public List<Node> getChildren()
-    {
+    public List<Node> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Node> children)
-    {
+    public void setChildren(List<Node> children) {
         this.children = children;
     }
 
-    public Node getParent()
-    {
+    public Node getParent() {
         return parent;
     }
 
-    public void setParent(Node parent)
-    {
+    public void setParent(Node parent) {
         this.parent = parent;
     }
 
@@ -148,8 +132,7 @@ public class Node {
      *
      * @return
      */
-    public boolean isRoot()
-    {
+    public boolean isRoot() {
         return parent == null;
     }
 
@@ -158,8 +141,7 @@ public class Node {
      *
      * @return
      */
-    public boolean isParentExpand()
-    {
+    public boolean isParentExpand() {
         if (parent == null)
             return false;
         return parent.isExpand();
@@ -170,37 +152,31 @@ public class Node {
      *
      * @return
      */
-    public boolean isLeaf()
-    {
-        return children.size() == 0;
+    public boolean isLeaf() {
+        return (children.size() == 0 && !itemId.equals("dir"));
     }
 
     /**
      * 获取level
      */
-    public int getLevel()
-    {
+    public int getLevel() {
         return parent == null ? 0 : parent.getLevel() + 1;
     }
 
     /**
-     *  设置展开
+     * 设置展开
      *
      * @param isExpand
      */
-    public void setExpand(boolean isExpand)
-    {
+    public void setExpand(boolean isExpand) {
         this.isExpand = isExpand;
-        if (!isExpand)
-        {
+        if (!isExpand) {
 
-            for (Node node : children)
-            {
+            for (Node node : children) {
                 node.setExpand(isExpand);
             }
         }
     }
-
 
 
 }

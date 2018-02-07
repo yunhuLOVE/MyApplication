@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.augur.zongyang.R;
 import com.augur.zongyang.activity.login.LoginActivity;
-import com.augur.zongyang.activity.mywork.MyWorkActivity;
+import com.augur.zongyang.activity.mywork.MyWorkTabActivity;
 import com.augur.zongyang.adapter.MainMenuAdapter;
 import com.augur.zongyang.bean.CurrentUser;
 import com.augur.zongyang.model.MainManuItemData;
@@ -27,7 +27,9 @@ import com.augur.zongyang.util.asynctask.GetDataFromNetAsyncTask;
 import com.augur.zongyang.util.constant.BundleKeyConstant;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yunhu on 2017-12-11.
@@ -60,6 +62,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
         initView();
         initData();
+        //版本更新检查
+//        new UpdateVersionUtil(this).getVerData();
     }
 
     private void initView() {
@@ -100,7 +104,7 @@ public class MainMenuActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putInt(BundleKeyConstant.TYPE,0);
             bundle.putString(BundleKeyConstant.TITLE, "待办");
-            addItem(R.mipmap.item_not_to_do, R.drawable.item_blue, R.string.item_not_to_do, count_0, MyWorkActivity.class, bundle);
+            addItem(R.mipmap.item_not_to_do, R.drawable.item_blue, R.string.item_not_to_do, count_0, MyWorkTabActivity.class, bundle);
         }
 
         /*
@@ -110,7 +114,7 @@ public class MainMenuActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putInt(BundleKeyConstant.TYPE,1);
             bundle.putString(BundleKeyConstant.TITLE, "在办");
-            addItem(R.mipmap.icon_work, R.drawable.item_green, R.string.item_doing, count_1, MyWorkActivity.class, bundle);
+            addItem(R.mipmap.icon_work, R.drawable.item_green, R.string.item_doing, count_1, MyWorkTabActivity.class, bundle);
         }
 
         /*
@@ -120,7 +124,7 @@ public class MainMenuActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putInt(BundleKeyConstant.TYPE,2);
             bundle.putString(BundleKeyConstant.TITLE, "已办");
-            addItem(R.mipmap.item_have_to_do, R.drawable.item_orange_red, R.string.item_have_to_do, 0, MyWorkActivity.class, bundle);
+//            addItem(R.mipmap.item_have_to_do, R.drawable.item_orange_red, R.string.item_have_to_do, 0, MyWorkTabActivity.class, bundle);
         }
 
         /*
@@ -128,9 +132,9 @@ public class MainMenuActivity extends AppCompatActivity {
          */
         {
             Bundle bundle = new Bundle();
-            bundle.putInt(BundleKeyConstant.POSITION,2);
+            bundle.putInt(BundleKeyConstant.TYPE,3);
             bundle.putString(BundleKeyConstant.TITLE, "项目查询");
-            addItem(R.mipmap.icon_search, R.drawable.item_orange_yellow, R.string.item_project_search, 0, MyWorkActivity.class, bundle);
+            addItem(R.mipmap.icon_search, R.drawable.item_orange_yellow, R.string.item_project_search, 0, MyWorkTabActivity.class, bundle);
         }
 
         mainMenuAdapter.setData(this.mainManuItemDatas);
@@ -248,7 +252,7 @@ public class MainMenuActivity extends AppCompatActivity {
          */
     private void getCount(final int type) {
 
-        new GetDataFromNetAsyncTask<TaskListResult, String>(mContext, null,
+        new GetDataFromNetAsyncTask<>(mContext, null,
                 new GetDataFromNetAsyncTask.GetDataFromNetAsyncTaskListener<TaskListResult, String>() {
                     @Override
                     public TaskListResult getResult(String... params) {
@@ -258,18 +262,20 @@ public class MainMenuActivity extends AppCompatActivity {
                             loginName = CurrentUser.getInstance()
                                     .getCurrentUser()
                                     .getLoginName();
-                        if (type == 0){
+                        Map<Object, Object> paramMap = new HashMap<>();
+                        paramMap.put("loginName",loginName);
+                        if (type == 1){
                             return NetworkHelper
                                     .getInstance(mContext)
                                     .getHttpOpera(MyWorkHttpOpera.class)
-                                    .getDoingTaskList(loginName);
+                                    .getDoingTaskList(paramMap);
                         }
 
 
                         return NetworkHelper
                                 .getInstance(mContext)
                                 .getHttpOpera(MyWorkHttpOpera.class)
-                                .getNotToDoTaskList(loginName);
+                                .getNotToDoTaskList(paramMap);
                     }
 
                     @Override

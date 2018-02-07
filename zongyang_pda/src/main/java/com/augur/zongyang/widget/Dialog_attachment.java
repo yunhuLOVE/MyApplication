@@ -10,7 +10,6 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.augur.zongyang.activity.mywork.AttachmentListActivity;
 import com.augur.zongyang.bean.CurrentUser;
 import com.augur.zongyang.common.Common;
 import com.augur.zongyang.model.Response;
@@ -32,7 +31,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
 
 /**
  * Created by yunhu on 2018-01-12.
@@ -46,8 +44,9 @@ public class Dialog_attachment {
 
     private Handler msgHandler;
 
-    private String filePath = null;//文件路径
     private MyHandler mhandler;
+
+    private String filePath = null;//文件路径
     private String sysFileId;
     private String fileName;
     private String fileUrl;
@@ -56,12 +55,13 @@ public class Dialog_attachment {
     private static long filesize;
     private static int downsize;
 
-    public  Dialog_attachment(Activity activity,Handler handle){
+    public Dialog_attachment(Activity activity, Handler handle) {
         this.activity = activity;
         this.msgHandler = handle;
+        this.api = WebServiceApi.getInstance(activity);
     }
 
-    public void setDownloadDialog(Node node){
+    public void setDownloadDialog(Node node) {
         sysFileId = node.getId();
         fileName = node.getName();
 
@@ -87,7 +87,6 @@ public class Dialog_attachment {
                         // getFilePath();
                         fileUrl = api.getAPI_IMAGEREAD()
                                 + "?sysFileId=" + sysFileId;
-                        // fileUrl = api.getAgSupportUrl() + resultData;
                         Log.e(TAG, "fileUrl:" + fileUrl);
                         pBar = new ProgressDialog(activity);
                         pBar.setTitle("文件下载:");
@@ -97,6 +96,14 @@ public class Dialog_attachment {
                         // 设置ProgressDialog 的进度条是否不明确
                         pBar.setIndeterminate(false);
                         pBar.setCanceledOnTouchOutside(false);// 点击空白处不消失
+//                        //创建下载任务,downloadUrl就是下载链接
+//                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl));
+//                        //指定下载路径和下载文件名
+//                        request.setDestinationInExternalPublicDir(Common.APP_ATTACHMENT, fileName);
+//                        //获取下载管理器
+//                        DownloadManager downloadManager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
+//                        //将下载任务加入下载队列，否则不会进行下载
+//                        downloadManager.enqueue(request);
 
                         downFile(fileUrl);
 
@@ -115,7 +122,7 @@ public class Dialog_attachment {
         builder.create().show();
     }
 
-    public void setDeleteDialog(Node node){
+    public void setDeleteDialog(Node node) {
         sysFileId = node.getId();
         fileName = node.getName();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -146,21 +153,27 @@ public class Dialog_attachment {
     }
 
     File file;
-    private void downFile(final String url) {
+
+    private void downFile(final String urlStr) {
+
         pBar.show();
         new Thread() {
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                HttpGet get = new HttpGet(url);
-                HttpResponse response;
+                mhandler = new MyHandler();
                 try {
+                    HttpGet get = new HttpGet(urlStr);
+
+                    //在请求中明确定义不要进行压缩
+                    get.setHeader("Accept-Encoding", "identity");
+
+                    HttpResponse response;
                     response = client.execute(get);
                     HttpEntity entity = response.getEntity();
                     filesize = entity.getContentLength();
                     Log.e(TAG, "filesize:" + filesize);
                     InputStream is = entity.getContent();
-
                     FileOutputStream fileOutputStream = null;
                     sendMsg(0);
                     if (is != null) {
@@ -206,8 +219,6 @@ public class Dialog_attachment {
     }
 
 
-
-
     /*
     * 删除附件
     */
@@ -245,7 +256,8 @@ public class Dialog_attachment {
                     }
 
                     @Override
-                    public void onFail() {Message msg = new Message();
+                    public void onFail() {
+                        Message msg = new Message();
                         msg.what = -1;
                         msgHandler.sendMessage(msg);
                     }
@@ -253,17 +265,16 @@ public class Dialog_attachment {
 
     }
 
-    static class MyHandler extends Handler {
 
-        WeakReference<AttachmentListActivity> mActivity;
 
-        private MyHandler(AttachmentListActivity activity) {
-            this.mActivity = new WeakReference<>(activity);
+    class MyHandler extends Handler {
+
+
+        private MyHandler() {
         }
 
         @Override
         public void handleMessage(Message msg) {
-            AttachmentListActivity activity = mActivity.get();
             if (!Thread.currentThread().isInterrupted()) {
                 switch (msg.what) {
                     case 0:

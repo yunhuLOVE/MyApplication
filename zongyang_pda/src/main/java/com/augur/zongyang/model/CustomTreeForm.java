@@ -22,6 +22,8 @@ public class CustomTreeForm implements Serializable{
 
     private String fileFormat;
 
+    private String matterCode;
+
     private String memo1;
 
     private String  isCommon ;
@@ -65,6 +67,14 @@ public class CustomTreeForm implements Serializable{
 
     public void setFileFormat(String fileFormat) {
         this.fileFormat = fileFormat;
+    }
+
+    public String getMatterCode() {
+        return matterCode;
+    }
+
+    public void setMatterCode(String matterCode) {
+        this.matterCode = matterCode;
     }
 
     public String getMemo1() {

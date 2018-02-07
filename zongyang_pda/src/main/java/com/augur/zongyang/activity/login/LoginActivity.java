@@ -360,7 +360,7 @@ public class LoginActivity extends AppCompatActivity {
                     return TaskResult.FAILED;
                 } else {
                     OmUserData omUser = null;
-                    if(loginInfo.getResult() != null && loginInfo.getResult().getUser() != null)
+                    if (loginInfo.getResult() != null && loginInfo.getResult().getUser() != null)
                         omUser = loginInfo.getResult().getUser();
                     if (omUser != null
                             && omUser.getUserCode() != null) {
@@ -477,7 +477,7 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
         }
 
-         Handler handler = new Handler() {
+        Handler handler = new Handler() {
             @Override
             public void handleMessage(final Message msg) {
                 final int what = msg.what;

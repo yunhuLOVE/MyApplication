@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="accepted_result">
+        <item>同意受理</item>
+        <item>补件</item>
+    </string-array>
+</resources>

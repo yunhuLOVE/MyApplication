@@ -378,11 +378,12 @@ public class AttachmentListActivity extends AppCompatActivity implements View.On
                         if (CurrentUser.getInstance().getCurrentUser() != null)
                             userId = CurrentUser.getInstance().getCurrentUser()
                                     .getUserId();
-                        return NetworkHelper
-                                .getInstance(context)
-                                .getHttpOpera(
-                                        MyWorkHttpOpera.class)
-                                .getUploadFile(userId, "entityId", "entity", path, name);
+                        return null;
+//                                NetworkHelper
+//                                .getInstance(context)
+//                                .getHttpOpera(
+//                                        MyWorkHttpOpera.class)
+//                                .getUploadFile(null);
                     }
 
                     @Override

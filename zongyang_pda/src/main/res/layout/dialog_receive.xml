@@ -1,67 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right">
-        <ImageView
-            android:id="@+id/stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:src="@mipmap/common_ic_close_black"/>
-    </LinearLayout>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="发送环节及办理人:"
-        android:textColor="@color/blue"/>
-    
-    <LinearLayout
+        android:id="@+id/view_limit_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:gravity="center">
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:visibility="gone">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="下一环节:"
+            android:text="承诺办理时限(天):"
             android:textColor="@color/text_dark_gray"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
-        <RelativeLayout
+        <EditText
+            android:id="@+id/et_limit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <Spinner
-                android:id="@+id/sp_next_link"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center"
-                android:background="@null"
-                android:textColor="@color/text_gray"
-                android:textSize="14sp"/>
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:src="@mipmap/spinner_ic_down_arrow" />
-        </RelativeLayout>
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:enabled="false"
+            android:background="@null"
+            android:padding="5dp"
+            android:text="3"
+            android:textSize="14sp"
+            android:textColor="@color/black"/>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -74,14 +48,16 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
         android:gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="下一环节参与人:"
+            android:text="受理结果:"
             android:textColor="@color/text_dark_gray"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -89,14 +65,15 @@
             android:layout_weight="1">
 
             <Spinner
-                android:id="@+id/sp_next_link_person"
+                android:id="@+id/sp_result"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
-                android:gravity="center"
                 android:background="@null"
+                android:gravity="center"
+                android:entries="@array/accepted_result"
                 android:textColor="@color/text_gray"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="15dp"
@@ -107,6 +84,41 @@
                 android:src="@mipmap/spinner_ic_down_arrow" />
         </RelativeLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/divider_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="受理意见:"
+            android:textColor="@color/text_dark_gray"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_opinion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:padding="5dp"
+            android:textSize="14sp" />
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -147,5 +159,4 @@
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>
-
 </LinearLayout>

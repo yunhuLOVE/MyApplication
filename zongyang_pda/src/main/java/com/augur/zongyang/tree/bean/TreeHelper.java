@@ -1,5 +1,7 @@
 package com.augur.zongyang.tree.bean;
 
+import android.util.Log;
+
 import com.augur.zongyang.R;
 
 import java.lang.reflect.Field;
@@ -11,6 +13,8 @@ import java.util.List;
  */
 
 public class TreeHelper {
+
+    public static String TAG = "TreeHelper";
 
     /**
      * 传入我们的普通bean，转化为我们排序后的Node
@@ -25,7 +29,7 @@ public class TreeHelper {
             throws IllegalArgumentException, IllegalAccessException
 
     {
-        List<Node> result = new ArrayList<Node>();
+        List<Node> result = new ArrayList<>();
         // 将用户数据转化为List<Node>以及设置Node间关系
         List<Node> nodes = convetData2Node(datas);
         // 拿到根节点(parent != null)
@@ -44,9 +48,11 @@ public class TreeHelper {
      * @return
      */
     public static List<Node> filterVisibleNode(List<Node> nodes) {
-        List<Node> result = new ArrayList<Node>();
+        List<Node> result = new ArrayList<>();
 
         for (Node node : nodes) {
+            if (node.getId().equals("dir_2016")&&node.isExpand())
+                Log.e(TAG, "isExpand:" + node.isExpand());
             // 如果为跟节点，或者上层目录为展开状态
             if (node.isRoot() || node.isParentExpand()) {
                 setNodeIcon(node);
@@ -68,7 +74,7 @@ public class TreeHelper {
     private static <T> List<Node> convetData2Node(List<T> datas) throws IllegalArgumentException, IllegalAccessException
 
     {
-        List<Node> nodes = new ArrayList<Node>();
+        List<Node> nodes = new ArrayList<>();
         Node node = null;
 
         for (T t : datas) {
@@ -164,10 +170,10 @@ public class TreeHelper {
      * @param node
      */
     private static void setNodeIcon(Node node) {
-        if (node.getChildren().size() > 0 && node.isExpand()) {
-            node.setIcon(R.mipmap.tree_ex);
-        } else if (node.getChildren().size() > 0 && !node.isExpand()) {
-            node.setIcon(R.mipmap.tree_ec);
+        if ((node.getChildren().size() > 0 || node.getItemId().equals("dir")) && node.isExpand()) {
+            node.setIcon(R.mipmap.spinner_ic_down_arrow);
+        } else if ((node.getChildren().size() > 0 || node.getItemId().equals("dir")) && !node.isExpand()) {
+            node.setIcon(R.mipmap.stat_ic_enter);
         } else
             node.setIcon(-1);
 

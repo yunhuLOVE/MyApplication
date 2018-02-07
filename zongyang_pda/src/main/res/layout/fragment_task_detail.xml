@@ -931,15 +931,27 @@
             android:weightSum="2"
             android:gravity="center"
             android:layout_alignParentBottom="true">
-
+            <Button
+                android:id="@+id/btn_opinion"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:text="审批意见"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/submit"

@@ -84,4 +84,12 @@ public class OmUserHttpOpera extends MyBaseHttpOpera {
         }
         return user;
     }
+
+    public String getVerson(String str) {
+
+        String url = api.getAPI_UPFILE() + str;
+        Type type = new TypeToken<String>() {
+        }.getType();
+        return this.getResultObject(url, null, RequestMethod.GET, type);
+    }
 }

@@ -116,7 +116,15 @@ public class WebServiceApi {
     // gallery下载图片
     public String getAPI_IMAGEREAD() {
         // TODO Auto-generated method stub
-        return this.getAfsSysFileUrl() + "readAttachment.action";
+        return this.getDgspUrl() + "/wf/wf-attachment-mgmt!readDocument.action";
+    }
+
+    /*
+	 * 获取版本信息
+	 */
+    public String getAPI_UPFILE() {
+        // TODO Auto-generated method stub
+        return this.getDgspUrl() + "/pdaUpdate/";
     }
 
     //获取待办列表
@@ -129,6 +137,16 @@ public class WebServiceApi {
         return this.getPdaHandleUrl() + "getZbSummary";
     }
 
+    //获取待在办列表
+    public String getAPI_GET_TASK_LIST_ALl_DEAL(){
+        return this.getPdaHandleUrl() + "getDzbSummary";
+    }
+
+    //按钮信息
+    public String getAPI_GET_BUTTON_INFO(){
+        return this.getPdaHandleUrl() + "getHandleBtns";
+    }
+
     //项目详情
     public String getAPI_GET_PROJECT_INFO(){
         return this.getPdaHandleUrl() + "projectInfo";
@@ -137,6 +155,16 @@ public class WebServiceApi {
     //任务签收
     public String getAPI_GET_TASK_SIGN(){
         return this.getPdaHandleUrl() + "signTask";
+    }
+
+    //获取下一环节信息（收件）
+    public String getAPI_GET_NEXT_LINK_INFO_RECEIVE(){
+        return this.getPdaHandleUrl() +"getStepFormByTaskInstId";
+    }
+
+    //保存收件意见（收件）
+    public String getAPI_GET_SAVE_RECEIVE_OPINION(){
+        return this.getPdaHandleUrl() +"saveRecieveOpinion";
     }
 
     //获取发送信息
@@ -149,6 +177,10 @@ public class WebServiceApi {
         return this.getPdaHandleUrl() + "getAssigneeRange";
     }
 
+    public String get_SENG_EXAMINE_OPINION(){
+        return getPdaHandleUrl() + "saveTaskOpinion";
+    }
+
     //发送在办流程信息
     public String get_SENG_LINK_DOING_CONTENT(){
         return this.getPdaHandleUrl() + "wfsend";
@@ -159,6 +191,11 @@ public class WebServiceApi {
         return this.getPdaHandleUrl() + "getFileDirFormByTemplateCode";
     }
 
+    //获取历史意见
+    public String getHISTORY_OPINION(){
+        return this.getPdaHandleUrl() + "getHistoryOpinions";
+    }
+
     // 获取附件列表
     public String getAPI_GET_ATTACHMENT_LIST_DATA() {
         return this.getPdaHandleUrl() + "attachment/getAttachments";
@@ -166,11 +203,11 @@ public class WebServiceApi {
 
     // 上传文件
     public String getAPI_GET_UPLOAD_FILE() {
-        return this.getPdaHandleUrl() + "attachment/uploadFiles";
+        return this.getPdaHandleUrl() + "uploadFiles";
     }
 
     // 删除附件
     public String getAPI_GET_DELETE_FILE() {
-        return this.getPdaHandleUrl() + "attachment/deleteFiles";
+        return this.getRestUrl() + "handle/deleteFiles";
     }
 }

@@ -25,17 +25,17 @@ public class TaskListAdapter extends BaseAdapter {
 
     private int type;
 
-    public TaskListAdapter(Activity activity, List<TaskDetailInfoModel> datas,int type) {
+    public TaskListAdapter(Activity activity, List<TaskDetailInfoModel> datas, int type) {
         this.activity = activity;
-        if(datas != null)
+        if (datas != null)
             list = datas;
         else
             list = new ArrayList<>();
         this.type = type;
     }
 
-    public void setData(List<TaskDetailInfoModel> datas){
-        if(datas == null)
+    public void setData(List<TaskDetailInfoModel> datas) {
+        if (datas == null)
             return;
         list = datas;
         this.notifyDataSetChanged();
@@ -67,7 +67,9 @@ public class TaskListAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.tv_state = convertView.findViewById(R.id.tv_state);
             viewHolder.project_name = convertView.findViewById(R.id.project_name);
-
+            viewHolder.construction_unit = convertView.findViewById(R.id.construction_unit);
+            viewHolder.link_name = convertView.findViewById(R.id.link_name);
+            viewHolder.create = convertView.findViewById(R.id.time);
             convertView.setTag(viewHolder);
 
         } else {
@@ -83,14 +85,20 @@ public class TaskListAdapter extends BaseAdapter {
         if (type == 2)
             viewHolder.tv_state.setText("已办");
 
-        if(data.getBusMemo1() != null)
-            viewHolder.project_name.setText(data.getBusMemo1());
+        if (data.getBusMemo1() != null)
+            viewHolder.project_name.setText("项目名称：" + data.getBusMemo1());
+        if (data.getActivityChineseName() != null)
+            viewHolder.link_name.setText("环节名称：" + data.getActivityChineseName());
 
+        viewHolder.create.setText("创建时间：" + data.getCreate());
         return convertView;
     }
 
     class ViewHolder {
         TextView tv_state;//状态
         TextView project_name;//项目名称
+        TextView construction_unit;
+        TextView link_name;
+        TextView create;
     }
 }

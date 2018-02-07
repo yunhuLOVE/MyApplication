@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -10,28 +10,27 @@
 
     <ImageView
         android:id="@+id/id_treenode_upload"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:visibility="invisible"
         app:srcCompat="@mipmap/tree_upload" />
 
     <ImageView
         android:id="@+id/id_treenode_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_toRightOf="@id/id_treenode_upload"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_marginLeft="15dp"
-        android:src="@mipmap/tree_ec" />
+        android:src="@mipmap/stat_ic_enter" />
 
     <TextView
         android:id="@+id/id_treenode_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/id_treenode_icon"
-        android:textSize="18dip"
+        android:layout_marginLeft="10dp"
+        android:textSize="14dip"
         android:textColor="@color/black"/>
 
 
 
-</RelativeLayout>
+</LinearLayout>

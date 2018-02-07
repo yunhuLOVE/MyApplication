@@ -20,6 +20,7 @@ import com.augur.zongyang.network.helper.NetworkHelper;
 import com.augur.zongyang.network.operator.MyWorkHttpOpera;
 import com.augur.zongyang.util.SpinnerUtil;
 import com.augur.zongyang.util.StringUtil;
+import com.augur.zongyang.util.asynctask.CommonUploadDataToNetAsyncTask;
 import com.augur.zongyang.util.asynctask.GetDataFromNetAsyncTask;
 
 import java.util.ArrayList;
@@ -81,12 +82,12 @@ public class Dialog_sendNextLink implements View.OnClickListener, AdapterView.On
 
         LayoutInflater inflater = activity.getLayoutInflater();
 
-        View customDialogView = inflater.inflate(R.layout.dialog_setting, null);
+        View customDialogView = inflater.inflate(R.layout.dialog_next_link_send, null);
 
         dialog = new AlertDialog.Builder(activity).create();
 
         //不加这行代码，会导致无法弹出软键盘
-        dialog.setView(activity.getLayoutInflater().inflate(R.layout.dialog_setting, null));
+        dialog.setView(activity.getLayoutInflater().inflate(R.layout.dialog_next_link_send, null));
 
         dialog.show();
 
@@ -117,6 +118,17 @@ public class Dialog_sendNextLink implements View.OnClickListener, AdapterView.On
 
         initData();
         setListener();
+    }
+
+    private void setListener() {
+        iv_back.setOnClickListener(this);
+        btn_send.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
+
+        //下一环节
+        sp_nextLink.setOnItemSelectedListener(this);
+        //下一环节参与者
+        sp_nextLinkPerson.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -156,17 +168,6 @@ public class Dialog_sendNextLink implements View.OnClickListener, AdapterView.On
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-    }
-
-    private void setListener() {
-        iv_back.setOnClickListener(this);
-        btn_send.setOnClickListener(this);
-        btn_back.setOnClickListener(this);
-
-        //下一环节
-        sp_nextLink.setOnItemSelectedListener(this);
-        //下一环节参与者
-        sp_nextLinkPerson.setOnItemSelectedListener(this);
     }
 
     /*
@@ -243,23 +244,31 @@ public class Dialog_sendNextLink implements View.OnClickListener, AdapterView.On
     发送环节信息
      */
     private void sendDoingContent() {
-        new GetDataFromNetAsyncTask<>(activity, "流程发送",
-                new GetDataFromNetAsyncTask.GetDataFromNetAsyncTaskListener<Response, String>() {
-                    @Override
-                    public Response getResult(String... params) {
 
+        new CommonUploadDataToNetAsyncTask<String>(activity, "数据发送", "发送成功",
+                "发送失败",
+                new CommonUploadDataToNetAsyncTask.CommonUploadDataToNetAsyncTaskListener<String>() {
+
+                    @Override
+                    public Response doUpload(String... String) {
                         Map<String, String> paramMap = new HashMap<>();
 
                         paramMap.put("taskInstDbid", taskData.getTaskInstDbid().toString());
-                        //下一环节名称(英文)
-                        paramMap.put("destActivityName", linkInfos.get(sp_nextLink.getSelectedItemPosition()).getName());
-                        //下一环节名称(中文)
-                        paramMap.put("destActivityChineseName", sp_nextLink.getSelectedItem().toString());
+                        if(sp_nextLink != null && sp_nextLink.getAdapter() != null){
+                            //下一环节名称(英文)
+                            paramMap.put("destActivityName", linkInfos.get(sp_nextLink.getSelectedItemPosition()).getName());
+                            //下一环节名称(中文)
+                            paramMap.put("destActivityChineseName", sp_nextLink.getSelectedItem().toString());
+                        }
+
                         paramMap.put("templateCode", taskData.getTemplateCode());
                         paramMap.put("procInstId", taskData.getProcInstId());
-                        //下一环节参与人ID
-                        NextLinkPersonModel person = persons.get(sp_nextLinkPerson.getSelectedItemPosition());
-                        paramMap.put("selectedAssignees", person.getType() + "%" +person.getUserId());
+                        if(sp_nextLinkPerson != null && sp_nextLinkPerson.getAdapter() != null){
+                            //下一环节参与人ID
+                            NextLinkPersonModel person = persons.get(sp_nextLinkPerson.getSelectedItemPosition());
+                            paramMap.put("selectedAssignees", person.getType() + "#" +person.getUserId());
+                        }
+
                         //当前用户ID
                         paramMap.put("loginUserId", CurrentUser.getInstance().getCurrentUser().getUserId().toString());
 
@@ -270,17 +279,13 @@ public class Dialog_sendNextLink implements View.OnClickListener, AdapterView.On
                     }
 
                     @Override
-                    public void onSuccess(Response result) {
-                        if(result.isSuccess()){
-                            dialog.dismiss();
-                            activity.finish();
-                        }
-
+                    public void onSuccess() {
+                        dialog.dismiss();
+                        activity.finish();
                     }
 
                     @Override
                     public void onFail() {
-
                     }
                 }).execute();
     }

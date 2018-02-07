@@ -116,6 +116,14 @@ public abstract class TreeListViewAdapter<T> extends BaseAdapter{
         {
             if (!n.isLeaf()) {
                 n.setExpand(!n.isExpand());
+
+                //node展开状态改变，对应子节点的parent也要更新
+                for(Node node : mAllNodes){
+                    if(node.getpId().equals(n.getId())){
+                        node.setParent(n);
+                    }
+                }
+
                 mNodes = TreeHelper.filterVisibleNode(mAllNodes);
                 notifyDataSetChanged();// 刷新视图
             }
