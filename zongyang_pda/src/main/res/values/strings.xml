@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">ZONGYANG_PDA</string>
+    <string name="app_name">枞阳多规</string>
 
-    <string name="default_base_url">192.168.1.110:10086</string>
+    <string name="default_base_url">112.27.91.2:9006</string>
 
     <string name="user_name">用户名</string>
     <string name="password">密码</string>
@@ -28,16 +28,39 @@
     <string name="exit_app">确定要退出系统吗？</string>
     <string name="submit">提交</string>
 
+    <string name="lastUpdateTime">最近更新:</string>
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+
 
     <string name="item_work">我的工作</string>
     <string name="item_not_to_do">待办事项</string>
     <string name="item_doing">在办事项</string>
     <string name="item_have_to_do">已办事项</string>
+    <string name="item_supervision">效能督查</string>
     <string name="item_project_search">项目查询</string>
 
     <string name="not_to_do">待办</string>
     <string name="doing">在办</string>
     <string name="have_to_do">已办</string>
+
+    <string name="register_phase">登记阶段</string>
+    <string name="being_deal_with">正在办理</string>
+    <string name="overdue">逾期</string>
+    <string name="have_done">已办结</string>
+    <string name="hang_up">挂起</string>
+    <string name="about_to_expire">即将到期</string>
+    <string name="overtime_not_todo">超时未办</string>
+    <string name="overtime_have_todo">超时已办</string>
+    <string name="shceme_joint_trial">方案会审</string>
 
     <!--项目基本信息-->
     <string name="basis_info">基本信息</string>

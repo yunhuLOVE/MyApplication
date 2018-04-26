@@ -25,7 +25,7 @@ public class Common {
     // 更新软件文件名字
     public static final String UPDATE_SAVENAME = "update_zongyang.apk";
     // 软件包名
-    public static final String APP_PACKAGE = "com.augurit.zongyang_pda";
+    public static final String APP_PACKAGE = "com.augur.zongyang";
 
     public static final String APP_ROOT = SD_PATH + "/zongyang";
 

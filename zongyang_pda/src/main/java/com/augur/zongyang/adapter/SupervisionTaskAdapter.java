@@ -8,24 +8,24 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.augur.zongyang.R;
-import com.augur.zongyang.model.TaskDetailInfoModel;
+import com.augur.zongyang.model.SupervisionProjectForm;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by yunhu on 2017-12-14.
+ * Created by yunhu on 2018-03-01.
  */
 
-public class TaskListAdapter extends BaseAdapter {
+public class SupervisionTaskAdapter extends BaseAdapter {
 
     private Activity activity;
 
-    private List<TaskDetailInfoModel> list;
+    private List<SupervisionProjectForm> list;
 
     private int type;
 
-    public TaskListAdapter(Activity activity, List<TaskDetailInfoModel> datas, int type) {
+    public SupervisionTaskAdapter(Activity activity, List<SupervisionProjectForm> datas, int type) {
         this.activity = activity;
         if (datas != null)
             list = datas;
@@ -34,7 +34,7 @@ public class TaskListAdapter extends BaseAdapter {
         this.type = type;
     }
 
-    public void setData(List<TaskDetailInfoModel> datas) {
+    public void setData(List<SupervisionProjectForm> datas) {
         if (datas == null)
             return;
         list = datas;
@@ -76,7 +76,7 @@ public class TaskListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        TaskDetailInfoModel data = list.get(position);
+        SupervisionProjectForm data = list.get(position);
 
         if (type == 0)
             viewHolder.tv_state.setText("待办");
@@ -84,14 +84,10 @@ public class TaskListAdapter extends BaseAdapter {
             viewHolder.tv_state.setText("在办");
         if (type == 2)
             viewHolder.tv_state.setText("已办");
-
-        if (data.getBusMemo1() != null)
-            viewHolder.project_name.setText("项目名称：" + data.getBusMemo1());
-//        viewHolder.construction_unit.setText("建设单位：" + data.getApplicant());
-        if (data.getActivityChineseName() != null)
-            viewHolder.link_name.setText("环节名称：" + data.getActivityChineseName());
-
-        viewHolder.create.setText("创建时间：" + data.getCreate());
+        viewHolder.project_name.setText("项目名称：" + data.getProjectName());
+        viewHolder.construction_unit.setText("建设单位：" + data.getApplicant());
+        viewHolder.link_name.setText("申报事项：" + data.getMatterName());
+        viewHolder.create.setText("申报时间：" + data.getProCreateDate());
         return convertView;
     }
 

@@ -4,4 +4,16 @@
         <item>同意受理</item>
         <item>补件</item>
     </string-array>
+
+    <string-array name="project_state">
+        <item>登记阶段</item>
+        <item>正在办理</item>
+        <item>逾期</item>
+        <item>已办结</item>
+        <item>挂起</item>
+        <item>即将到期</item>
+        <item>超时未办</item>
+        <item>超时已办</item>
+        <item>方案会审</item>
+    </string-array>
 </resources>

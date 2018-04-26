@@ -21,6 +21,7 @@ import com.augur.zongyang.model.ButtonModel;
 import com.augur.zongyang.model.ProjectInfoModel;
 import com.augur.zongyang.model.ReceiveForm;
 import com.augur.zongyang.model.Response;
+import com.augur.zongyang.model.SupervisionProjectForm;
 import com.augur.zongyang.model.TaskDetailInfoModel;
 import com.augur.zongyang.model.TaskSignInfoModel;
 import com.augur.zongyang.model.result.ProjectInfoResult;
@@ -45,6 +46,11 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
     private View fragmentView;
 
     private Activity activity;
+
+    /*
+    效能督查
+     */
+    private SupervisionProjectForm supervisitionInfo;
 
     //项目列表中任务信息
     private TaskDetailInfoModel taskData;
@@ -101,9 +107,6 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
 
     public static TaskDetailFragment newInstance(int position) {
         TaskDetailFragment fragment = new TaskDetailFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(BundleKeyConstant.TYPE, position);
-//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -115,7 +118,10 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
 
         type = activity.getIntent().getExtras().getInt(BundleKeyConstant.TYPE, -1);
 
-        taskData = (TaskDetailInfoModel) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
+        if (type == 4)//效能督查
+            supervisitionInfo = (SupervisionProjectForm) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
+        else
+            taskData = (TaskDetailInfoModel) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
     }
 
     @Override
@@ -158,9 +164,8 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
         et_contact = fragmentView.findViewById(R.id.contact);//联系人
         et_contact_phone = fragmentView.findViewById(R.id.contact_phone);//联系电话
 
-//        if (type != 1)
-//            linearLayout1.setVisibility(View.GONE);
-
+        if (type != 1 && type != 0)
+            linearLayout1.setVisibility(View.GONE);
 
     }
 
@@ -191,7 +196,9 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
     }
 
     private void initData() {
-        signTask();
+
+        if (type == 0 || type == 1)
+            signTask();
         initBaseData();
 
         btn_opinion.setOnClickListener(this);
@@ -243,7 +250,7 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
                         if (taskSignInfo != null)
                             paramMap.put("processDefId", taskSignInfo.getProcessDefId());
                         paramMap.put("activityName", taskData.getActivityName());
-                        paramMap.put("procInstId",taskData.getProcInstId());
+                        paramMap.put("procInstId", taskData.getProcInstId());
 
                         return NetworkHelper
                                 .getInstance(activity)
@@ -280,10 +287,11 @@ public class TaskDetailFragment extends Fragment implements View.OnClickListener
                     @Override
                     public ProjectInfoResult getResult(String... params) {
 
+
                         return NetworkHelper
                                 .getInstance(activity)
                                 .getHttpOpera(MyWorkHttpOpera.class)
-                                .getProjectInfo(taskData.getMasterEntityKey());
+                                .getProjectInfo(taskData == null ? supervisitionInfo.getId() : taskData.getMasterEntityKey());
                     }
 
                     @Override

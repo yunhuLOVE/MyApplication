@@ -52,7 +52,7 @@ public class SimpleTreeAdapter<T> extends TreeListViewAdapter {
         }
 
         //子节点为叶子节点时，显示上传文件按钮
-        if (type == 1 && node.getItemId().equals("dir") &&
+        if ((type == 1 || type == 0) && node.getItemId().equals("dir") &&
                 (node.getChildren().size() == 0 ||
                         (node.getChildren().size() > 0 && node.getChildren().get(0).isLeaf())
                 ))

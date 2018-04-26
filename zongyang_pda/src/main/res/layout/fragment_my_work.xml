@@ -8,9 +8,24 @@
     <include layout="@layout/card_project_search" />
 
 
-    <ListView
-        android:id="@+id/listView"
+    <com.augur.zongyang.util.view.PullToRefreshLayout
+        android:id="@+id/refresh_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <include layout="@layout/refresh_head" />
+
+        <com.augur.zongyang.util.view.PullableListView
+            android:id="@+id/content_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:divider="@color/divider_gray"
+            android:dividerHeight="1px">
+
+        </com.augur.zongyang.util.view.PullableListView>
+
+        <include layout="@layout/load_more" />
+    </com.augur.zongyang.util.view.PullToRefreshLayout>
 
 </LinearLayout>

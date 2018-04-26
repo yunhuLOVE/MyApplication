@@ -91,10 +91,10 @@ public class Dialog_attachment {
                         pBar = new ProgressDialog(activity);
                         pBar.setTitle("文件下载:");
                         pBar.setMessage(fileName);
-                        pBar.setProgressNumberFormat("%1d KB/%2d KB");
+//                        pBar.setProgressNumberFormat("%1d KB/%2d KB");
                         pBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                         // 设置ProgressDialog 的进度条是否不明确
-                        pBar.setIndeterminate(false);
+                        pBar.setIndeterminate(true);
                         pBar.setCanceledOnTouchOutside(false);// 点击空白处不消失
 //                        //创建下载任务,downloadUrl就是下载链接
 //                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl));
@@ -195,6 +195,7 @@ public class Dialog_attachment {
                             sendMsg(downsize);
                             Thread.sleep(10);
                         }
+                        pBar.dismiss();
                     }
                     if (fileOutputStream != null)
                         fileOutputStream.flush();
@@ -278,7 +279,7 @@ public class Dialog_attachment {
             if (!Thread.currentThread().isInterrupted()) {
                 switch (msg.what) {
                     case 0:
-                        pBar.setMax((int) filesize / (1024));
+//                        pBar.setMax((int) filesize / (1024));
                         break;
                     case -4:
                         Toast.makeText(activity, "文件下载完成", Toast.LENGTH_SHORT).show();
@@ -294,7 +295,7 @@ public class Dialog_attachment {
                         Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
                         break;
                     default:
-                        pBar.setProgress(msg.what / (1024));
+//                        pBar.setProgress(msg.what / (1024));
                         break;
                 }
             }

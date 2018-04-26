@@ -1,5 +1,4 @@
-package com.augur.zongyang.fragment;
-
+package com.augur.zongyang.activity.supervision;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -7,27 +6,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.augur.zongyang.R;
 import com.augur.zongyang.activity.mywork.TaskTabActivity;
-import com.augur.zongyang.adapter.TaskListAdapter;
-import com.augur.zongyang.bean.CurrentUser;
-import com.augur.zongyang.model.TaskDetailInfoModel;
-import com.augur.zongyang.model.result.TaskListResult;
+import com.augur.zongyang.adapter.SupervisionTaskAdapter;
+import com.augur.zongyang.model.SupervisionProjectForm;
+import com.augur.zongyang.model.result.SupervisionTaskListResult;
 import com.augur.zongyang.network.helper.NetworkHelper;
 import com.augur.zongyang.network.operator.MyWorkHttpOpera;
+import com.augur.zongyang.util.SpinnerUtil;
 import com.augur.zongyang.util.StringUtil;
 import com.augur.zongyang.util.TimeUtil;
 import com.augur.zongyang.util.asynctask.GetDataFromNetAsyncTask;
@@ -43,27 +40,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by yunhu on 2017-12-13.
+ * 效能督查案件列表（查询）
  */
-
-public class MyWorkFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
-
-    private String TAG = "MyWorkFragment";
+public class SupervisionListActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener{
 
     private Activity activity;
 
-    private View fragmentView;
+    private int type = 0;
 
-    /*
-    案件类型 0：待办，1：在办，2：已办
-     */
-    private int type;
+    //标题
+    private TextView title;
+    //返回
+    private ImageView back;
 
     //案件列表
     private ListView listView;
-    private TaskListResult result;
-    private List<TaskDetailInfoModel> datas;
-    private TaskListAdapter adapter;
+    private SupervisionTaskListResult result;
+    private List<SupervisionProjectForm> datas;
+    private SupervisionTaskAdapter adapter;
 
     // 记录当前时间的变量
     private int year;
@@ -77,8 +71,9 @@ public class MyWorkFragment extends Fragment implements View.OnClickListener, Ad
     private TextView endTime;
     //项目名称
     private EditText et_projectName;
-    //流程类别
-    private EditText et_processCategory;
+    //项目状态
+    private Spinner sp_project_state;
+
     //查询按钮
     private Button btn_search;
 
@@ -86,53 +81,47 @@ public class MyWorkFragment extends Fragment implements View.OnClickListener, Ad
 
     public int page = 1, pageSize = 10;
 
-    public static MyWorkFragment newInstance(int position) {
-        MyWorkFragment mFragment = new MyWorkFragment();
-
-        return mFragment;
-    }
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_supervision_list);
+        activity = this;
 
-        activity = getActivity();
-        type = getArguments().getInt(BundleKeyConstant.TYPE, -1);
-        Log.e(TAG, "type:" + type);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        fragmentView = inflater.inflate(R.layout.fragment_my_work, container, false);
+        if(getIntent().getExtras() != null)
+            type = getIntent().getExtras().getInt(BundleKeyConstant.TYPE,0);
 
         initView();
         initData();
-
-        return fragmentView;
     }
 
     private void initView() {
 
-        et_projectName = fragmentView.findViewById(R.id.et_projectName);
-        et_processCategory = fragmentView.findViewById(R.id.et_processCategory);
-        startTime = fragmentView.findViewById(R.id.startTime);
-        endTime = fragmentView.findViewById(R.id.endTime);
-        btn_search = fragmentView.findViewById(R.id.btn_search);
+        title = findViewById(R.id.title);
+        back = findViewById(R.id.iv_back);
 
-        ((PullToRefreshLayout) fragmentView.findViewById(R.id.refresh_view)).setOnRefreshListener(new MyListener());
-        listView = fragmentView.findViewById(R.id.content_view);
+        et_projectName = findViewById(R.id.et_projectName);
+        sp_project_state = findViewById(R.id.sp_project_state);
+        startTime = findViewById(R.id.startTime);
+        endTime = findViewById(R.id.endTime);
+        btn_search = findViewById(R.id.btn_search);
+
+        ((PullToRefreshLayout) findViewById(R.id.refresh_view)).setOnRefreshListener(new MyListener());
+        listView = findViewById(R.id.content_view);
     }
 
     private void initData() {
+
+        if(getIntent().getExtras() != null)
+            title.setText(getIntent().getExtras().getString(BundleKeyConstant.TITLE,"登记阶段"));
+        back.setOnClickListener(this);
+
         /*
         初始化查询界面数据
          */
         initSearchData();
 
         datas = new ArrayList<>();
-        adapter = new TaskListAdapter(this.getActivity(), datas, type);
+        adapter = new SupervisionTaskAdapter(this,datas,type);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
     }
@@ -144,10 +133,10 @@ public class MyWorkFragment extends Fragment implements View.OnClickListener, Ad
             case R.id.content_view:
 
                 Bundle bundle = new Bundle();
-                bundle.putInt(BundleKeyConstant.TYPE, type);
+                bundle.putInt(BundleKeyConstant.TYPE,4);
                 bundle.putSerializable(BundleKeyConstant.DATA, datas.get(position));
                 Intent intent = new Intent();
-                intent.setClass(MyWorkFragment.this.getContext(), TaskTabActivity.class);
+                intent.setClass(activity, TaskTabActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -166,54 +155,41 @@ public class MyWorkFragment extends Fragment implements View.OnClickListener, Ad
          */
     private void doSearch() {
 
-        new GetDataFromNetAsyncTask<>(MyWorkFragment.this.getContext(), null,
-                new GetDataFromNetAsyncTask.GetDataFromNetAsyncTaskListener<TaskListResult, String>() {
+        new GetDataFromNetAsyncTask<>(activity, null,
+                new GetDataFromNetAsyncTask.GetDataFromNetAsyncTaskListener<List<SupervisionTaskListResult>, String>() {
                     @Override
-                    public TaskListResult getResult(String... params) {
-
-//                Log.e(TAG,"type:"+type);
+                    public List<SupervisionTaskListResult> getResult(String... params) {
 
                         Map<Object, Object> paramMap = new HashMap<>();
-                        paramMap.put("loginName", CurrentUser.getInstance()
-                                .getCurrentUser()
-                                .getLoginName());
 
-                        if (isSearch) {
-                            paramMap.put("projectName", StringUtil.getNotNullString(et_projectName.getText().toString(), ""));
-                            paramMap.put("templateName", StringUtil.getNotNullString(et_processCategory.getText().toString(), ""));
-                            paramMap.put("createSDate", StringUtil.getNotNullString(startTime.getText().toString(), ""));
-                            paramMap.put("createEDate", StringUtil.getNotNullString(endTime.getText().toString(), ""));
+                        paramMap.put("type",type);
+
+                        if(isSearch){
+                            paramMap.put("projectName", StringUtil.getNotNullString(et_projectName.getText().toString(),""));
+                            paramMap.put("createsDate",StringUtil.getNotNullString(startTime.getText().toString(),""));
+                            paramMap.put("createeDate",StringUtil.getNotNullString(endTime.getText().toString(),""));
+//                            paramMap.put("type",sp_project_state.getSelectedItemId());
                         }
                         paramMap.put("page", +page + "");
                         paramMap.put("limit", pageSize + "");
-
-                        if (type == 1)
-                            return NetworkHelper
-                                    .getInstance(MyWorkFragment.this.getContext())
-                                    .getHttpOpera(MyWorkHttpOpera.class)
-                                    .getDoingTaskList(paramMap);
-
-                        if (type == 3)
-                            return NetworkHelper
-                                    .getInstance(MyWorkFragment.this.getContext())
-                                    .getHttpOpera(MyWorkHttpOpera.class)
-                                    .getAllDealTaskList(paramMap);
-
                         return NetworkHelper
-                                .getInstance(MyWorkFragment.this.getContext())
+                                .getInstance(activity)
                                 .getHttpOpera(MyWorkHttpOpera.class)
-                                .getNotToDoTaskList(paramMap);
+                                .getRegisterListOfSupervision(paramMap);
                     }
 
                     @Override
-                    public void onSuccess(TaskListResult taskListResult) {
+                    public void onSuccess(List<SupervisionTaskListResult> taskListResult) {
                         isSearch = false;
-                        result = taskListResult;
-                        if (taskListResult != null && taskListResult.getResult() != null) {
-                            datas = taskListResult.getResult();
+                        if(taskListResult != null){
+
+                            if(sp_project_state != null && sp_project_state.getSelectedItem() != null)
+                                title.setText(sp_project_state.getSelectedItem().toString());
+
+                            result = taskListResult.get(0);
+                            datas = taskListResult.get(0).getResult();
                             adapter.setData(datas);
                         }
-
                     }
 
                     @Override
@@ -226,7 +202,30 @@ public class MyWorkFragment extends Fragment implements View.OnClickListener, Ad
     /*
         初始化查询界面数据
          */
-    private void initSearchData() {
+    private void initSearchData(){
+        String[] stateArr = getResources().getStringArray(R.array.project_state);
+        List<String> list = new ArrayList<>();
+        for(int i = 0; i < stateArr.length; i ++){
+            list.add(stateArr[i]);
+        }
+        sp_project_state.setAdapter(SpinnerUtil.getCenterAdapter(activity,list));
+
+        sp_project_state.setSelection(type);
+
+        sp_project_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -237,8 +236,8 @@ public class MyWorkFragment extends Fragment implements View.OnClickListener, Ad
         calendar.set(year, month - 1, day);
         String strStart = TimeUtil.TWITTER_SEARCH_API_DATE_FORMATTER_EX.format(calendar.getTime());
 
-        startTime.setText(strStart); // 显示一月前的年月日
-        endTime.setText(strEnd); //
+//        startTime.setText(strStart); // 显示一月前的年月日
+//        endTime.setText(strEnd); //
 
         startTime.setOnClickListener(this);
         endTime.setOnClickListener(this);
@@ -248,6 +247,10 @@ public class MyWorkFragment extends Fragment implements View.OnClickListener, Ad
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+
             case R.id.startTime://开始时间
                 flag = 0;
                 try {
@@ -331,7 +334,6 @@ public class MyWorkFragment extends Fragment implements View.OnClickListener, Ad
 
         }
     };
-
     class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override

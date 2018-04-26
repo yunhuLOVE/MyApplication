@@ -85,7 +85,7 @@ public class WebServiceApi {
         return this.getDgspUrl() + strRest + urlDivider;
     }
 
-    private String getPdaHandleUrl(){
+    public String getPdaHandleUrl(){
         return this.getRestUrl() + "pdaHandle" + urlDivider;
     }
 
@@ -141,6 +141,18 @@ public class WebServiceApi {
     public String getAPI_GET_TASK_LIST_ALl_DEAL(){
         return this.getPdaHandleUrl() + "getDzbSummary";
     }
+
+
+    /*
+    效能督查
+     */
+
+
+    //登记阶段
+    public String getAPI_GET_RESISTER_LIST_OF_SUPERVISION(){
+        return this.getPdaHandleUrl() + "register";
+    }
+
 
     //按钮信息
     public String getAPI_GET_BUTTON_INFO(){

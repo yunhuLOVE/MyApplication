@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ import com.augur.zongyang.bean.CurrentUser;
 import com.augur.zongyang.manager.ToastManager;
 import com.augur.zongyang.model.CustomTreeForm;
 import com.augur.zongyang.model.Response;
+import com.augur.zongyang.model.SupervisionProjectForm;
 import com.augur.zongyang.model.TaskDetailInfoModel;
 import com.augur.zongyang.network.helper.NetworkHelper;
 import com.augur.zongyang.network.operator.MyWorkHttpOpera;
@@ -57,6 +57,11 @@ public class AttachmentCatalogFragment extends Fragment {
     private View fragmentView;
 
     private int type;
+
+    /*
+    效能督查
+     */
+    private SupervisionProjectForm supervisitionInfo;
 
     //项目列表中任务信息
     private TaskDetailInfoModel taskData;
@@ -96,8 +101,11 @@ public class AttachmentCatalogFragment extends Fragment {
         //在API23+以上，不止要在AndroidManifest.xml里面添加权限
         MyFileUtil.verifyStoragePermissions(activity);
 
-        type = activity.getIntent().getExtras().getInt(BundleKeyConstant.TYPE,0);
-        taskData = (TaskDetailInfoModel) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
+        type = activity.getIntent().getExtras().getInt(BundleKeyConstant.TYPE, 0);
+        if (type == 4)//效能督查
+            supervisitionInfo = (SupervisionProjectForm) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
+        else
+            taskData = (TaskDetailInfoModel) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
     }
 
     @Override
@@ -121,10 +129,17 @@ public class AttachmentCatalogFragment extends Fragment {
                     public List<CustomTreeForm> getResult(
                             String... strings) {
                         Map<Object, Object> paramMap = new HashMap<>();
-                        paramMap.put("templateCode", taskData.getTemplateCode());
-                        paramMap.put("procInstId", taskData.getProcInstId());
-                        paramMap.put("entityId", taskData.getMasterEntityKey().toString());
-                        paramMap.put("viewName", "dzb");
+                        if(taskData != null) {
+                            paramMap.put("templateCode", taskData.getTemplateCode());
+                            paramMap.put("procInstId", taskData.getProcInstId());
+                            paramMap.put("entityId", taskData.getMasterEntityKey().toString());
+                            paramMap.put("viewName", "dzb");
+                        }else if(supervisitionInfo != null){
+                            paramMap.put("templateCode", supervisitionInfo.getTemplateCode());
+                            paramMap.put("procInstId", supervisitionInfo.getProcInstanceId());
+                            paramMap.put("entityId", supervisitionInfo.getId().toString());
+                            paramMap.put("viewName", "dzb");
+                        }
                         return NetworkHelper
                                 .getInstance(activity)
                                 .getHttpOpera(
@@ -134,7 +149,6 @@ public class AttachmentCatalogFragment extends Fragment {
                     @Override
                     public void onSuccess(List<CustomTreeForm> resultData) {
                         if (resultData != null && resultData.size() > 0) {
-                            Log.e(TAG, "datas.size:" + resultData.size());
                             forms = resultData;
                             initData();
                         }
@@ -153,19 +167,12 @@ public class AttachmentCatalogFragment extends Fragment {
         try {
             setData(forms, null);
             mAdapter = new SimpleTreeAdapter<>(mTree, activity,
-                    mDatas, 3, handle,type);
+                    mDatas, 3, handle, type);
             mAdapter.setOnTreeNodeClickListener(new TreeListViewAdapter.OnTreeNodeClickListener() {
                 @Override
                 public void onClick(Node node, int position) {
                     if (node.isLeaf()) {
-
-//                        for(CustomTreeForm form : itemForms){
-//                            if(form.getId().equals(node.getId())){
-//
-//                            }
-//                        }
                         attachmentDialog.setDownloadDialog(node);
-
                     }
                 }
             });
@@ -173,8 +180,14 @@ public class AttachmentCatalogFragment extends Fragment {
             mAdapter.setOnTreeNodeLongClickListener(new TreeListViewAdapter.OnTreeNodeLongClickListener() {
                 @Override
                 public boolean onLongClick(Node node, int position) {
-                    if (node.isLeaf()) {
+                    if ((type == 0 || type == 1)&&node.isLeaf()) {
                         attachmentDialog.setDeleteDialog(node);
+//                        for(CustomTreeForm form : itemForms){
+//                            if(form.getId().equals(node.getId())){
+//
+//                            }
+//                        }
+
                         return true;
                     }
                     return true;
@@ -266,7 +279,7 @@ public class AttachmentCatalogFragment extends Fragment {
                 if (data != null) {
                     Uri uri = data.getData();
                     filePath = MyFileUtil.getPath(activity, uri);
-                    Log.e(TAG, "filePath:" + filePath);
+//                    Log.e(TAG, "filePath:" + filePath);
                     if (filePath == null) {
                         Toast.makeText(activity, "选择文件失败，请重新选择", Toast.LENGTH_SHORT)
                                 .show();
@@ -274,7 +287,7 @@ public class AttachmentCatalogFragment extends Fragment {
                         uploadDialog(filePath, "*");
                     }
 
-                    Log.e(TAG, "path:" + filePath);
+//                    Log.e(TAG, "path:" + filePath);
                 }
                 break;
 
@@ -291,13 +304,13 @@ public class AttachmentCatalogFragment extends Fragment {
         final EditText et_opinion = textEntryView
                 .findViewById(R.id.editText);
 
-         fileName = (new File(filePath)).getName();
+        fileName = (new File(filePath)).getName();
         if (fileName.contains(".")) {
             int index = fileName.lastIndexOf(".");
-            et_opinion.setText(fileName.substring(0,index));
+            et_opinion.setText(fileName.substring(0, index));
             if (index > 0)
                 fileExpand = fileName.substring(index + 1).toLowerCase();
-        }else{
+        } else {
             et_opinion.setText(fileName);
         }
 
@@ -346,7 +359,6 @@ public class AttachmentCatalogFragment extends Fragment {
 
                         if (form.getId() != null && form.getId().contains("_")) {
                             String dirId = form.getId().substring(form.getId().lastIndexOf("_") + 1);
-                            Log.e(TAG, "id:" + form.getId() + ",dirId:" + dirId);
                             paramMap.put("dirId", dirId);
                         }
 

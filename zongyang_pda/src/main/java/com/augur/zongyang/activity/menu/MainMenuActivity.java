@@ -23,6 +23,7 @@ import com.augur.zongyang.model.MainManuItemData;
 import com.augur.zongyang.model.result.TaskListResult;
 import com.augur.zongyang.network.helper.NetworkHelper;
 import com.augur.zongyang.network.operator.MyWorkHttpOpera;
+import com.augur.zongyang.util.UpdateVersionUtil;
 import com.augur.zongyang.util.asynctask.GetDataFromNetAsyncTask;
 import com.augur.zongyang.util.constant.BundleKeyConstant;
 
@@ -63,7 +64,7 @@ public class MainMenuActivity extends AppCompatActivity {
         initView();
         initData();
         //版本更新检查
-//        new UpdateVersionUtil(this).getVerData();
+        new UpdateVersionUtil(this).getVerData();
     }
 
     private void initView() {
@@ -95,6 +96,18 @@ public class MainMenuActivity extends AppCompatActivity {
         getCount(1);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        getTaskNum();
+    }
+
     private void updateUI() {
         mainManuItemDatas = new ArrayList<>();
         /*
@@ -104,7 +117,7 @@ public class MainMenuActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putInt(BundleKeyConstant.TYPE,0);
             bundle.putString(BundleKeyConstant.TITLE, "待办");
-            addItem(R.mipmap.item_not_to_do, R.drawable.item_blue, R.string.item_not_to_do, count_0, MyWorkTabActivity.class, bundle);
+            addItem(R.mipmap.menu_todo, R.drawable.item_blue, R.string.item_not_to_do, count_0, MyWorkTabActivity.class, bundle);
         }
 
         /*
@@ -114,7 +127,7 @@ public class MainMenuActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putInt(BundleKeyConstant.TYPE,1);
             bundle.putString(BundleKeyConstant.TITLE, "在办");
-            addItem(R.mipmap.icon_work, R.drawable.item_green, R.string.item_doing, count_1, MyWorkTabActivity.class, bundle);
+            addItem(R.mipmap.menu_doing, R.drawable.item_green, R.string.item_doing, count_1, MyWorkTabActivity.class, bundle);
         }
 
         /*
@@ -128,13 +141,23 @@ public class MainMenuActivity extends AppCompatActivity {
         }
 
         /*
+        效能督查
+         */
+        {
+            Bundle bundle = new Bundle();
+            bundle.putInt(BundleKeyConstant.TYPE,2);
+            bundle.putString(BundleKeyConstant.TITLE, "效能督查");
+            addItem(R.mipmap.menu_inspector, R.drawable.item_orange_red, R.string.item_supervision, 0, SupervisionMenuActivity.class, bundle);
+        }
+
+        /*
         项目查询
          */
         {
             Bundle bundle = new Bundle();
             bundle.putInt(BundleKeyConstant.TYPE,3);
             bundle.putString(BundleKeyConstant.TITLE, "项目查询");
-            addItem(R.mipmap.icon_search, R.drawable.item_orange_yellow, R.string.item_project_search, 0, MyWorkTabActivity.class, bundle);
+            addItem(R.mipmap.menu_search, R.drawable.item_orange_yellow, R.string.item_project_search, 0, MyWorkTabActivity.class, bundle);
         }
 
         mainMenuAdapter.setData(this.mainManuItemDatas);
@@ -282,8 +305,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     public void onSuccess(TaskListResult taskListResult) {
 
                         if(taskListResult.getResult() != null){
-                            int size = taskListResult.getResult().size();
-//                            Log.e(TAG,"size:"+size);
+                            int size = taskListResult.getTotalItems();
                             switch (type){
                                 case 0://待办
                                     count_0 = size;

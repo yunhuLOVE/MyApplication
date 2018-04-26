@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.augur.zongyang.R;
 import com.augur.zongyang.manager.ToastManager;
 import com.augur.zongyang.model.HistoryOpinionForm;
+import com.augur.zongyang.model.SupervisionProjectForm;
 import com.augur.zongyang.model.TaskDetailInfoModel;
 import com.augur.zongyang.network.helper.NetworkHelper;
 import com.augur.zongyang.network.operator.MyWorkHttpOpera;
@@ -42,6 +43,11 @@ public class HistoryOpinionFragment extends Fragment {
 
     private int type;
 
+    /*
+    效能督查
+     */
+    private SupervisionProjectForm supervisitionInfo;
+
     //项目列表中任务信息
     private TaskDetailInfoModel taskData;
 
@@ -69,7 +75,10 @@ public class HistoryOpinionFragment extends Fragment {
         super.onCreate(savedInstanceState);
         activity = getActivity();
         type = activity.getIntent().getExtras().getInt(BundleKeyConstant.TYPE, 0);
-        taskData = (TaskDetailInfoModel) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
+        if (type == 4)//效能督查
+            supervisitionInfo = (SupervisionProjectForm) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
+        else
+            taskData = (TaskDetailInfoModel) activity.getIntent().getExtras().getSerializable(BundleKeyConstant.DATA);
         if (getArguments() != null) {
         }
     }
@@ -95,7 +104,7 @@ public class HistoryOpinionFragment extends Fragment {
                     public List<HistoryOpinionForm> getResult(
                             String... strings) {
                         Map<Object, Object> paramMap = new HashMap<>();
-                        paramMap.put("procInstId", taskData.getProcInstId());
+                        paramMap.put("procInstId", taskData == null ? supervisitionInfo.getProcInstanceId() : taskData.getProcInstId());
                         return NetworkHelper
                                 .getInstance(activity)
                                 .getHttpOpera(

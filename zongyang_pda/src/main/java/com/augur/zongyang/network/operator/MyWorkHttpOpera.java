@@ -14,6 +14,7 @@ import com.augur.zongyang.model.http.request.RequestMethod;
 import com.augur.zongyang.model.result.ProjectInfoResult;
 import com.augur.zongyang.model.result.ReceiveResult;
 import com.augur.zongyang.model.result.SendBaseInfoResult;
+import com.augur.zongyang.model.result.SupervisionTaskListResult;
 import com.augur.zongyang.model.result.SysFileFormResult;
 import com.augur.zongyang.model.result.TaskListResult;
 import com.augur.zongyang.network.operator.base.MyBaseHttpOpera;
@@ -71,6 +72,24 @@ public class MyWorkHttpOpera extends MyBaseHttpOpera {
     }
 
     /*
+    登记阶段
+     */
+    public List<SupervisionTaskListResult> getRegisterListOfSupervision(Map<Object, Object> paramMap) {
+
+        String[] stateArray = {"register", "accept", "yuqi", "yiban", "guaqi", "daoqi", "cswb", "csyb", "fahs"};
+
+        String url = api.getAPI_GET_RESISTER_LIST_OF_SUPERVISION();
+        if (paramMap.get("type") != null){
+            url = api.getPdaHandleUrl() + stateArray[Integer.parseInt(paramMap.get("type").toString())];
+            paramMap.remove("type");
+        }
+
+        Type type = new TypeToken<List<SupervisionTaskListResult>>() {
+        }.getType();
+        return this.getResultObject(url, paramMap, RequestMethod.GET, type);
+    }
+
+    /*
     获取按钮信息
      */
     public List<ButtonModel> getButtonInfo(Map<Object, Object> paramMap) {
@@ -102,7 +121,7 @@ public class MyWorkHttpOpera extends MyBaseHttpOpera {
         Type type = new TypeToken<TaskSignInfoModel>() {
         }.getType();
         Map<Object, Object> paramMap = new HashMap<Object, Object>();
-        paramMap.put("taskInstDbid", taskInstDbid+"");
+        paramMap.put("taskInstDbid", taskInstDbid + "");
         paramMap.put("loginName", loginName);
 
         return this.getResultObject(url, paramMap, RequestMethod.GET, type);
@@ -111,7 +130,7 @@ public class MyWorkHttpOpera extends MyBaseHttpOpera {
     /*
     获取下一环节信息（收件）
      */
-    public ReceiveResult getNextLinkInfo(Map<Object, Object> paramMap){
+    public ReceiveResult getNextLinkInfo(Map<Object, Object> paramMap) {
         String url = api.getAPI_GET_NEXT_LINK_INFO_RECEIVE();
         Type type = new TypeToken<ReceiveResult>() {
         }.getType();
@@ -122,7 +141,7 @@ public class MyWorkHttpOpera extends MyBaseHttpOpera {
     /*
    保存收件意见
     */
-    public ReceiveResult geSaveReceiveOpinion(Map<Object, Object> paramMap){
+    public ReceiveResult geSaveReceiveOpinion(Map<Object, Object> paramMap) {
         String url = api.getAPI_GET_SAVE_RECEIVE_OPINION();
         Type type = new TypeToken<ReceiveResult>() {
         }.getType();
