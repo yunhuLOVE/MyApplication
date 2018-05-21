@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">枞阳多规</string>
+    
+    <string name="base_ip">112.27.91.2</string>
+    
+    <string name="base_port">9006</string>
+
+    <!--netty推送端口-->
+    <string name="netty_port">8686</string>
 
     <string name="default_base_url">112.27.91.2:9006</string>
 
@@ -26,6 +33,7 @@
 
     <string name="save">保存</string>
     <string name="exit_app">确定要退出系统吗？</string>
+    <string name="exit_warn">“注销”后将无法收到新的待办事项通知！</string>
     <string name="submit">提交</string>
 
     <string name="lastUpdateTime">最近更新:</string>

@@ -50,6 +50,8 @@
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activity.menu.SupervisionMenuActivity"></activity>
+
+        <service android:name=".netty.NettyService"/>
     </application>
 
 </manifest>

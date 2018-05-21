@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.augur.zongyang.R;
 import com.augur.zongyang.activity.login.LoginActivity;
@@ -21,6 +22,7 @@ import com.augur.zongyang.adapter.MainMenuAdapter;
 import com.augur.zongyang.bean.CurrentUser;
 import com.augur.zongyang.model.MainManuItemData;
 import com.augur.zongyang.model.result.TaskListResult;
+import com.augur.zongyang.netty.NettyService;
 import com.augur.zongyang.network.helper.NetworkHelper;
 import com.augur.zongyang.network.operator.MyWorkHttpOpera;
 import com.augur.zongyang.util.UpdateVersionUtil;
@@ -33,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 主菜单
  * Created by yunhu on 2017-12-11.
  */
 
@@ -46,6 +49,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private TextView title;
     //返回
     private ImageView back;
+    //退出
+    private ImageView close;
     //网格
     private GridView gridView;
 
@@ -61,15 +66,26 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
+        startService(new Intent(this, NettyService.class));
+
         initView();
         initData();
         //版本更新检查
         new UpdateVersionUtil(this).getVerData();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, NettyService.class));
+    }
+
     private void initView() {
         title = findViewById(R.id.title);
         back = findViewById(R.id.iv_back);
+        close = findViewById(R.id.iv_close);
+        back.setVisibility(View.GONE);
+        close.setVisibility(View.VISIBLE);
         gridView = findViewById(R.id.gridView);
     }
 
@@ -80,7 +96,7 @@ public class MainMenuActivity extends AppCompatActivity {
             mainManuItemDatas = new ArrayList<>();
             mainMenuAdapter = new MainMenuAdapter(mContext, mainManuItemDatas);
             gridView.setAdapter(mainMenuAdapter);
-            back.setOnClickListener(clickListener);
+            close.setOnClickListener(clickListener);
             gridView.setOnItemClickListener(itemClickListener);
             updateUI();
             getTaskNum();
@@ -169,7 +185,7 @@ public class MainMenuActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             switch (v.getId()) {
-                case R.id.iv_back://返回
+                case R.id.iv_close://退出
                     exit();
                     break;
 
@@ -195,10 +211,21 @@ public class MainMenuActivity extends AppCompatActivity {
 
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK://返回键
-                exit();
+//                exit();
                 break;
         }
         return super.onKeyDown(keyCode, event);
+    }
+    private long firstPressedTime;
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - firstPressedTime < 2000) {
+//            super.onBackPressed();
+            MainMenuActivity.this.moveTaskToBack(true);
+        } else {
+            Toast.makeText(MainMenuActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            firstPressedTime = System.currentTimeMillis();
+        }
     }
 
     /*
@@ -244,12 +271,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                 MainMenuActivity.this);
-        alertDialog.setTitle("退出提示").setMessage(R.string.exit_app)
-                .setPositiveButton("退出", new DialogInterface.OnClickListener() {
-
+        alertDialog.setTitle("注销提示").setMessage(R.string.exit_warn)
+                .setPositiveButton("注销", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MainMenuActivity.this.moveTaskToBack(true);
+                        LoginActivity.unRegist(mContext);
+                        MainMenuActivity.this.finish();
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -259,14 +286,29 @@ public class MainMenuActivity extends AppCompatActivity {
 
                     }
                 })
-                .setNeutralButton("注销", new DialogInterface.OnClickListener() {
+//                .setNeutralButton("退出", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        MainMenuActivity.this.moveTaskToBack(true);
+//                    }
+//                })
+                .setCancelable(false).create().show();
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        LoginActivity.unRegist(mContext);
-                        MainMenuActivity.this.finish();
-                    }
-                }).setCancelable(false).create().show();
+//        try {
+//            Field mAlert = AlertDialog.class.getDeclaredField("mAlert");
+//            mAlert.setAccessible(true);
+//            Object mAlertController = mAlert.get(alertDialog);
+//            Field mMessage = mAlertController.getClass().getDeclaredField("mMessageView");
+//            mMessage.setAccessible(true);
+//            TextView mMessageView = (TextView) mMessage.get(mAlertController);
+//            mMessageView.setTextColor(Color.RED);
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchFieldException e) {
+//            e.printStackTrace();
+//        }
+
 
     }
 

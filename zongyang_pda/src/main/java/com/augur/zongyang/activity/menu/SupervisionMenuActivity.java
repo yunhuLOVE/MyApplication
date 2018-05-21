@@ -26,6 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 效能督查菜单
+ */
 public class SupervisionMenuActivity extends AppCompatActivity {
 
     private String TAG = "SupervisionMenuActivity";
